@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: DefaultPaddleConfig
   m_EditorClassIdentifier: 
   paddleWidth: 4
-  maximumSpeed: 8
-  acceleration: 50
-  decceleration: 100
+  maximumSpeed: 15
+  acceleration: 100
+  decceleration: 150
