@@ -8,15 +8,14 @@ namespace BreakoutGame
     {
         [SerializeField]
         private BreakoutGameConfig _config;
+        [SerializeField]
+        private BreakoutGameFactory _breakoutGameFactory;
 
         void Start()
         {
-            
-        }
+            var breakoutGame = _breakoutGameFactory.CreateBreakoutGame(_config);
 
-        void Update()
-        {
-
+            Destroy(gameObject);
         }
     }
 }
