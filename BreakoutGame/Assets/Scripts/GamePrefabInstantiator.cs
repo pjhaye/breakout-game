@@ -15,8 +15,8 @@ namespace BreakoutGame
         {
             foreach(var prefabToInstantiate in _prefabsToInstantiate)
             {
-                var gameObject = Instantiate(prefabToInstantiate);
-                gameObject.name = prefabToInstantiate.name;
+                var prefabGameObject = Instantiate(prefabToInstantiate);
+                prefabGameObject.name = prefabToInstantiate.name;
             }
             Destroy(gameObject);
         }
