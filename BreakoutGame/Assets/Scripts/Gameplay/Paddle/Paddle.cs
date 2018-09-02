@@ -91,6 +91,21 @@ namespace BreakoutGame
             transform.localScale = new Vector3(unitSize * width, unitSize, unitSize);
         }
 
+        public void SetMaximumSpeed(float value)
+        {
+            PaddleMovement.MaximumSpeed = value;
+        }
+
+        public void SetAcceleration(float value)
+        {
+            PaddleMovement.Acceleration = value;
+        }
+
+        public void SetDecceleration(float value)
+        {
+            PaddleMovement.Decceleration = value;
+        }
+
         public void OnAxisInput(Vector2 axis)
         {
             axis.y = 0.0f;            

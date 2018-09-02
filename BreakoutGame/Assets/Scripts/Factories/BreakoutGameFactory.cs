@@ -172,6 +172,9 @@ namespace BreakoutGame
                 breakoutGameController.GameBoardWidth * 0.5f * unitSize);
 
             paddle.SetWidth(unitSize, paddleConfig.paddleWidth);
+            paddle.SetMaximumSpeed(paddleConfig.maximumSpeed);
+            paddle.SetAcceleration(paddleConfig.acceleration);
+            paddle.SetDecceleration(paddleConfig.decceleration);
 
             breakoutGameController.AssignPaddle(paddle);
         }
