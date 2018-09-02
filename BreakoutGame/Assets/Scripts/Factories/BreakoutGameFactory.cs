@@ -54,7 +54,7 @@ public class BreakoutGameFactory : MonoBehaviour
 		CreateWall(breakoutGameController, topWallConfig);
 	}
 
-	private GameObject CreateWall(
+	private void CreateWall(
 		BreakoutGameController breakoutGameController, 
 		WallConfig wallConfig)
 	{
@@ -68,8 +68,6 @@ public class BreakoutGameFactory : MonoBehaviour
 		wallTransform.localRotation = Quaternion.Euler(0.0f, wallConfig.angle, 0.0f);
 		wallTransform.localScale = new Vector3(wallConfig.width, 1.0f, 1.0f);
 
-		breakoutGameController.AddWall(wall);
-
-		return wallGameObject;
+		breakoutGameController.AddWall(wall);		
 	}
 }
