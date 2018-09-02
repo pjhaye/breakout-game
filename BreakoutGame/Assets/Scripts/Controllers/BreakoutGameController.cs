@@ -6,6 +6,9 @@ namespace BreakoutGame
 {
     public class BreakoutGameController : MonoBehaviour
     {
+        [SerializeField]
+        private BrickFactory _brickFactory;
+
         private CameraRigController _cameraRig;
         private Paddle _paddle;
         private PlayerInputController _playerInputController;
@@ -24,9 +27,9 @@ namespace BreakoutGame
 
         private void Awake()
         {
-            _playerInputController = GetComponent<PlayerInputController>();
+            _playerInputController = GetComponent<PlayerInputController>();            
         }
-
+      
         public void AddWall(Wall wall)
         {
             wall.transform.SetParent(transform, true);

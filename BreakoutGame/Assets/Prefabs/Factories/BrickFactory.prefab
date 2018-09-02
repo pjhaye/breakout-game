@@ -9,59 +9,54 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1186173538642648}
+  m_RootGameObject: {fileID: 1910434973203168}
   m_IsPrefabAsset: 1
---- !u!1 &1186173538642648
+--- !u!1 &1910434973203168
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4253098976784224}
-  - component: {fileID: 114609728935142466}
-  - component: {fileID: 114964342401847638}
+  - component: {fileID: 4385981806920856}
+  - component: {fileID: 114626068284681162}
   m_Layer: 0
-  m_Name: BreakoutGame
+  m_Name: BrickFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4253098976784224
+--- !u!4 &4385981806920856
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1186173538642648}
+  m_GameObject: {fileID: 1910434973203168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.7173214, y: -0.9136143, z: 3.0011644}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114609728935142466
+--- !u!114 &114626068284681162
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1186173538642648}
+  m_GameObject: {fileID: 1910434973203168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca648ccb660be1d459b0cadbd7bb9e5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 63a0a88c6989626448dde57682257e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brickFactory: {fileID: 114626068284681162, guid: cc4bfa670bee89442a71e99bd78d2fd6,
+  _brickPrefab: {fileID: 1904543750839938, guid: ffd967dc01444704186f0373e6c4a0b0,
     type: 2}
---- !u!114 &114964342401847638
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1186173538642648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c342d7348a7be9d469860833ac66db5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _brickColorsToMaterials:
+  - color: 0
+    material: {fileID: 2100000, guid: f1e3e86d4c46da5439e2b1979b3ad7a9, type: 2}
+  - color: 1
+    material: {fileID: 2100000, guid: a08399969ffaac441b7180cf732ba221, type: 2}
+  - color: 2
+    material: {fileID: 2100000, guid: fcc31c780b767554fb1fcfd6a71176a8, type: 2}
