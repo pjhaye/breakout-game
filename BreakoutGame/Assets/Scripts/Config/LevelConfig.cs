@@ -8,6 +8,9 @@ namespace BreakoutGame
     public class LevelConfig : ScriptableObject
     {                
         [Tooltip("Config for each row starting top to bottom")]
-        public RowConfig[] rowConfigs;        
+        public RowConfig[] rowConfigs;
+        [Tooltip("Settings that should be used by the Ball for this level")]
+        public BallConfig ballConfig;
+
     }
 }

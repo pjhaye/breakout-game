@@ -11,7 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72ea014b2f6ac04892d51eaa225e4ab, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  brickTopCenterPosition: {x: 0, y: -11.5}
   rowConfigs:
   - numColumns: 11
     brickSpawnRuleConfigs:
@@ -49,3 +48,4 @@ MonoBehaviour:
       minColumnPercent: 0
       maxColumnPercent: 1
       brickColors: 02000000
+  ballConfig: {fileID: 11400000, guid: e5655c14d64ff6c449170d1ee63b4a4d, type: 2}

@@ -14,3 +14,4 @@ MonoBehaviour:
   gameBoardConfig: {fileID: 11400000, guid: 8a62eed2a7aadf643b48affbeaec5101, type: 2}
   cameraConfig: {fileID: 11400000, guid: 80e27b9e56429d848ac3f5dd4ea902d3, type: 2}
   paddleConfig: {fileID: 11400000, guid: b44354fd824617b47b22876d8dab2e84, type: 2}
+  ballConfig: {fileID: 11400000, guid: e5655c14d64ff6c449170d1ee63b4a4d, type: 2}

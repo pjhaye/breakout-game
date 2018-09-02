@@ -44,7 +44,6 @@ namespace BreakoutGame
 
             var y = (rowIndex * unitSize + brickTopCenterPosition.y);
             var startX = -(breakoutGameController.PaddedGameBoardWidth * 0.5f + brickTopCenterPosition.x) * unitSize;
-            Debug.Log(breakoutGameController.PaddedGameBoardWidth + " : "  + breakoutGameController.GameBoardWidth);
             for (var i = 0; i < numColumns; i++)
             {
                 var x = startX + (i * baseWidth * unitSize) + (baseWidth * 0.5f * unitSize);
@@ -76,7 +75,9 @@ namespace BreakoutGame
             return brickConfig;
         }
 
-        private List<BrickSpawnRuleConfig> GetValidSpawnRuleConfigs(float columnPercent, List<BrickSpawnRuleConfig> spawnRuleConfigs)
+        private List<BrickSpawnRuleConfig> GetValidSpawnRuleConfigs(
+            float columnPercent, 
+            List<BrickSpawnRuleConfig> spawnRuleConfigs)
         {
             var result = new List<BrickSpawnRuleConfig>();
             var numBrickConfigs = spawnRuleConfigs.Count;

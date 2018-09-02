@@ -9,61 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1186173538642648}
+  m_RootGameObject: {fileID: 1886119470252072}
   m_IsPrefabAsset: 1
---- !u!1 &1186173538642648
+--- !u!1 &1886119470252072
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4253098976784224}
-  - component: {fileID: 114609728935142466}
-  - component: {fileID: 114964342401847638}
+  - component: {fileID: 4074257091712092}
+  - component: {fileID: 114881223823104060}
   m_Layer: 0
-  m_Name: BreakoutGame
+  m_Name: BallFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4253098976784224
+--- !u!4 &4074257091712092
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1186173538642648}
+  m_GameObject: {fileID: 1886119470252072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.7894936, y: 1.0212593, z: 1.4315186}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114609728935142466
+--- !u!114 &114881223823104060
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1186173538642648}
+  m_GameObject: {fileID: 1886119470252072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca648ccb660be1d459b0cadbd7bb9e5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e7624e2d2cdf604cbfc3fc1f5d24e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brickFactoryPrefab: {fileID: 1910434973203168, guid: cc4bfa670bee89442a71e99bd78d2fd6,
+  _ballPrefab: {fileID: 1519134301786918, guid: 66bb17906eb095f43a336f8f4a0f32fc,
     type: 2}
-  _ballFactoryPrefab: {fileID: 1886119470252072, guid: 628a624675f844c4287ff42c3098b794,
-    type: 2}
---- !u!114 &114964342401847638
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1186173538642648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c342d7348a7be9d469860833ac66db5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -8,14 +8,18 @@ namespace BreakoutGame
     {
         [SerializeField]
         private GameObject _brickFactoryPrefab;
+        [SerializeField]
+        private GameObject _ballFactoryPrefab;
 
         private LevelConfig[] _levels;
         private BrickFactory _brickFactory;
+        private BallFactory _ballFactory;
         private BrickGenerator _brickGenerator;
         private CameraRigController _cameraRig;
         private List<Brick> _bricks = new List<Brick>();
         private Paddle _paddle;
-        private PlayerInputController _playerInputController;        
+        private PlayerInputController _playerInputController;
+        private int _levelIndex = 0;
 
         public LevelConfig[] Levels
         {
@@ -81,18 +85,42 @@ namespace BreakoutGame
             }
         }
 
+        public LevelConfig CurrentLevelConfig
+        {
+            get
+            {
+                return Levels[_levelIndex];
+            }
+        }
+
+        public Vector3 BallStartPosition
+        {
+            get
+            {
+                return new Vector3(
+                    0.0f,
+                    0.0f,
+                    -(PaddedGameBoardHeight * 0.5f) + CurrentLevelConfig.ballConfig.startOffsetY);
+            }
+        }                
+
         private void Awake()
         {
             _playerInputController = GetComponent<PlayerInputController>();
 
             var brickFactoryGameObject = Instantiate(_brickFactoryPrefab);
             brickFactoryGameObject.name = _brickFactoryPrefab.name;
-            _brickFactory = brickFactoryGameObject.GetComponent<BrickFactory>();            
+            _brickFactory = brickFactoryGameObject.GetComponent<BrickFactory>();
+
+            var ballFactoryGameObject = Instantiate(_ballFactoryPrefab);
+            ballFactoryGameObject.name = _ballFactoryPrefab.name;
+            _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();
         }
 
         private void Start()
         {
-            GenerateLevel(Levels[0]);
+            GenerateLevel(CurrentLevelConfig);
+            CreateBall();
         }
 
         public void GenerateLevel(LevelConfig levelConfig)
@@ -123,9 +151,19 @@ namespace BreakoutGame
         {
             _paddle = paddle;
             _paddle.transform.SetParent(transform);
-            _paddle.transform.localPosition = new Vector3(0.0f, 0.0f, -GameBoardHeight * 0.5f * UnitSize);
+            _paddle.transform.localPosition = 
+                new Vector3(
+                    0.0f, 
+                    0.0f, 
+                    -GameBoardHeight * 0.5f * UnitSize);
             _playerInputController.Target = _paddle;
         }        
+
+        public void CreateBall()
+        {
+            var ball = _ballFactory.CreateBall(CurrentLevelConfig.ballConfig);
+            ball.transform.position = BallStartPosition * UnitSize;
+        }
 
         public void ClearBricks()
         {
