@@ -8,6 +8,7 @@ namespace BreakoutGame
     {
         private CameraRigController _cameraRig;
         private Paddle _paddle;
+        private PlayerInputController _playerInputController;
 
         public float GameBoardWidth
         {
@@ -20,7 +21,12 @@ namespace BreakoutGame
             get;
             set;
         }
-        
+
+        private void Awake()
+        {
+            _playerInputController = GetComponent<PlayerInputController>();
+        }
+
         public void AddWall(Wall wall)
         {
             wall.transform.SetParent(transform, true);
@@ -37,6 +43,7 @@ namespace BreakoutGame
             _paddle = paddle;
             _paddle.transform.SetParent(transform);
             _paddle.transform.localPosition = new Vector3(0.0f, 0.0f, -GameBoardHeight * 0.5f);
+            _playerInputController.Target = _paddle;
         }
     }
 }

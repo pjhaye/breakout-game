@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4253098976784224}
   - component: {fileID: 114609728935142466}
+  - component: {fileID: 114964342401847638}
   m_Layer: 0
   m_Name: BreakoutGame
   m_TagString: Untagged
@@ -49,5 +50,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca648ccb660be1d459b0cadbd7bb9e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114964342401847638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186173538642648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c342d7348a7be9d469860833ac66db5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
