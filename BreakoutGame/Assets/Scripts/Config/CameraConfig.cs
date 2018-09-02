@@ -5,9 +5,9 @@ using UnityEngine;
 namespace BreakoutGame
 {
     [CreateAssetMenu()]
-    public class GameBoardConfig : ScriptableObject
+    public class CameraConfig : ScriptableObject
     {
-        public int gameBoardWidth;
-        public int gameBoardHeight;              
+        public Vector3 baseCameraPosition;
+        public Vector3 baseCameraRotation;
     }
 }

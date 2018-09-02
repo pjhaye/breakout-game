@@ -8,7 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025b712cff7807543901015e7099ed01, type: 3}
-  m_Name: BreakoutGameConfig
+  m_Script: {fileID: 11500000, guid: 94a03b533c9c8024f84a46bf199194d3, type: 3}
+  m_Name: DefaultGameBoardConfig
   m_EditorClassIdentifier: 
-  GameBoardConfig: {fileID: 11400000, guid: 8a62eed2a7aadf643b48affbeaec5101, type: 2}
+  gameBoardWidth: 10
+  gameBoardHeight: 10

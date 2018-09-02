@@ -55,3 +55,5 @@ MonoBehaviour:
     type: 2}
   _wallPrefab: {fileID: 1679805489484260, guid: f209a50bc006a8947be909436e4f856c,
     type: 2}
+  _cameraRigPrefab: {fileID: 1346737195874878, guid: fe99ac26ac2544e4397fed198a5e8ae6,
+    type: 2}

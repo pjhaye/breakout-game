@@ -7,6 +7,7 @@ namespace BreakoutGame
     [CreateAssetMenu()]
     public class BreakoutGameConfig : ScriptableObject
     {
-        public GameBoardConfig GameBoardConfig;        
+        public GameBoardConfig gameBoardConfig;
+        public CameraConfig cameraConfig;
     }
 }
