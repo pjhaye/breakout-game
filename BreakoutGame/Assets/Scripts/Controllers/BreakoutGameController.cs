@@ -164,7 +164,7 @@ namespace BreakoutGame
                 new Vector3(
                     0.0f, 
                     0.0f, 
-                    -GameBoardHeight * 0.5f * UnitSize);
+                    -GameBoardHeight * 0.5f * UnitSize + UnitSize * 0.5f);
             _playerInputController.Target = _paddle;
         }        
 
