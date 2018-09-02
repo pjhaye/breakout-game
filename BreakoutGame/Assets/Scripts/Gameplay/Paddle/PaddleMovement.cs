@@ -17,6 +17,54 @@ namespace BreakoutGame
         [SerializeField]
         private bool _autoDeccelerate = true;
 
+        public float MaximumSpeed
+        {
+            get
+            {
+                return _maximumSpeed;
+            }
+            set
+            {
+                _maximumSpeed = value;
+            }
+        }
+
+        public float Acceleration
+        {
+            get
+            {
+                return _acceleration;
+            }
+            set
+            {
+                _acceleration = value;
+            }
+        }
+
+        public float Decceleration
+        {
+            get
+            {
+                return _decceleration;
+            }
+            set
+            {
+                _decceleration = value;
+            }
+        }
+
+        public bool AutoDeccelerate
+        {
+            get
+            {
+                return _autoDeccelerate;
+            }
+            set
+            {
+                _autoDeccelerate = value;
+            }
+        }
+
         private bool _movedLastFrame = false;
         private Vector3 _velocity = Vector3.zero;
         private Rigidbody _rigidbody;        
@@ -31,7 +79,7 @@ namespace BreakoutGame
 
         private void FixedUpdate()
         {
-            var shouldDeccelerate = _autoDeccelerate && !_movedLastFrame;            
+            var shouldDeccelerate = AutoDeccelerate && !_movedLastFrame;            
             if(shouldDeccelerate)
             {
                 Deccelerate(Time.deltaTime);
@@ -60,10 +108,10 @@ namespace BreakoutGame
                 _velocity = Vector3.zero;
             }
 
-            _velocity += direction * (_acceleration * deltaTime);
-            if(_velocity.magnitude > _maximumSpeed)
+            _velocity += direction * (Acceleration * deltaTime);
+            if(_velocity.magnitude > MaximumSpeed)
             {
-                _velocity = _velocity.normalized * _maximumSpeed;
+                _velocity = _velocity.normalized * MaximumSpeed;
             }            
             _movedLastFrame = true;
         }
@@ -78,7 +126,7 @@ namespace BreakoutGame
             }
             else
             {
-                speed -= _decceleration * deltaTime;
+                speed -= Decceleration * deltaTime;
                 if (speed <= Epsilon)
                 {
                     speed = 0.0f;
