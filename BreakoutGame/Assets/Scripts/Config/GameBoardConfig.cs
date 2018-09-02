@@ -12,5 +12,6 @@ namespace BreakoutGame
         public float horizontalPaddingPercent = 0.05f;
         public float verticalPaddingPercent = 0.05f;
         public float unitSize = 1.0f;
+        public float brickMeshScale = 0.95f;
     }
 }

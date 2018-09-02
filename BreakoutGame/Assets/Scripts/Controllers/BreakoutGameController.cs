@@ -59,6 +59,12 @@ namespace BreakoutGame
             set;
         }
 
+        public float BrickMeshScale
+        {
+            get;
+            set;
+        }
+
         public float PaddedGameBoardWidth
         {
             get
@@ -103,6 +109,7 @@ namespace BreakoutGame
         public void AddBrick(Brick brick)
         {
             _bricks.Add(brick);
+            brick.SetMeshScale(BrickMeshScale);
             brick.transform.SetParent(transform, true);
         }
 

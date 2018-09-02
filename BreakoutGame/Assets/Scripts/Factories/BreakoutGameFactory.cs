@@ -46,7 +46,8 @@ namespace BreakoutGame
             breakoutGameController.GameBoardHeight = gameBoardConfig.gameBoardHeight;
             breakoutGameController.HorizontalPaddingPercent = gameBoardConfig.horizontalPaddingPercent;
             breakoutGameController.VerticalPaddingPercent = gameBoardConfig.verticalPaddingPercent;
-            breakoutGameController.UnitSize = config.gameBoardConfig.unitSize;
+            breakoutGameController.UnitSize = gameBoardConfig.unitSize;
+            breakoutGameController.BrickMeshScale = gameBoardConfig.brickMeshScale;
 
             return breakoutGameController;
         }

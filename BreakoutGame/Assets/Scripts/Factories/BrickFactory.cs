@@ -17,7 +17,7 @@ namespace BreakoutGame
             brickGameObject.name = _brickPrefab.name;            
 
             var brick = brickGameObject.GetComponent<Brick>();
-            brick.SetSize(brickConfig.unitSize, brickConfig.width);
+            brick.SetSize(brickConfig.unitSize, brickConfig.width);            
             var material = GetMaterialFromBrickColor(brickConfig.color);
             brick.SetMaterial(material);
             return brick;
