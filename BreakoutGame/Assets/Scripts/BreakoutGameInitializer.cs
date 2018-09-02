@@ -9,11 +9,21 @@ namespace BreakoutGame
         [SerializeField]
         private BreakoutGameConfig _config;
         [SerializeField]
+        private GameObject _breakoutGameFactoryPrefab;
+
         private BreakoutGameFactory _breakoutGameFactory;
 
         void Start()
         {
-            var breakoutGame = _breakoutGameFactory.CreateBreakoutGame(_config);
+
+            var breakoutGameFactoryGameObject = 
+                Instantiate(_breakoutGameFactoryPrefab);
+            breakoutGameFactoryGameObject.name = _breakoutGameFactoryPrefab.name;
+
+            _breakoutGameFactory = breakoutGameFactoryGameObject
+                .GetComponent<BreakoutGameFactory>();
+
+            _breakoutGameFactory.CreateBreakoutGame(_config);
 
             Destroy(gameObject);
         }

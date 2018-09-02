@@ -7,8 +7,9 @@ namespace BreakoutGame
     public class BreakoutGameController : MonoBehaviour
     {
         [SerializeField]
-        private BrickFactory _brickFactory;
+        private GameObject _brickFactoryPrefab;
 
+        private BrickFactory _brickFactory;
         private CameraRigController _cameraRig;
         private Paddle _paddle;
         private PlayerInputController _playerInputController;
@@ -27,7 +28,11 @@ namespace BreakoutGame
 
         private void Awake()
         {
-            _playerInputController = GetComponent<PlayerInputController>();            
+            _playerInputController = GetComponent<PlayerInputController>();
+
+            var brickFactoryGameObject = Instantiate(_brickFactoryPrefab);
+            brickFactoryGameObject.name = _brickFactoryPrefab.name;
+            _brickFactory = brickFactoryGameObject.GetComponent<BrickFactory>();
         }
       
         public void AddWall(Wall wall)

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca648ccb660be1d459b0cadbd7bb9e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brickFactory: {fileID: 114626068284681162, guid: cc4bfa670bee89442a71e99bd78d2fd6,
+  _brickFactoryPrefab: {fileID: 1910434973203168, guid: cc4bfa670bee89442a71e99bd78d2fd6,
     type: 2}
 --- !u!114 &114964342401847638
 MonoBehaviour:
