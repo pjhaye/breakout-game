@@ -13,34 +13,52 @@ namespace BreakoutGame
         private GameObject _wallPrefab;
         [SerializeField]
         private GameObject _cameraRigPrefab;
+        [SerializeField]
+        private GameObject _paddlePrefab;
 
         public BreakoutGameController CreateBreakoutGame(BreakoutGameConfig config)
         {
-            var breakoutGameObject = Instantiate(_breakoutGamePrefab);
-            breakoutGameObject.name = _breakoutGamePrefab.name;
-            var breakoutGameController = breakoutGameObject.GetComponent<BreakoutGameController>();
+            var breakoutGameController = InstantiateBreakoutGame(config);
 
             var gameBoardConfig = config.gameBoardConfig;
-            InstantiateWalls(breakoutGameController, gameBoardConfig);
+            CreateWalls(breakoutGameController, gameBoardConfig);
+
             var cameraConfig = config.cameraConfig;
-            InstantiateCamera(breakoutGameController, cameraConfig);
+            CreateCamera(breakoutGameController, cameraConfig);
+
+            var paddleConfig = config.paddleConfig;
+            CreatePaddle(breakoutGameController, paddleConfig);
 
             return breakoutGameController;
         }
 
-        private void InstantiateCamera(
+        private BreakoutGameController InstantiateBreakoutGame(BreakoutGameConfig config)
+        {
+            var breakoutGameObject = Instantiate(_breakoutGamePrefab);
+            var breakoutGameController = breakoutGameObject.GetComponent<BreakoutGameController>();
+            breakoutGameObject.name = _breakoutGamePrefab.name;
+
+            var gameBoardConfig = config.gameBoardConfig;
+            breakoutGameController.GameBoardWidth = gameBoardConfig.gameBoardWidth;
+            breakoutGameController.GameBoardHeight = gameBoardConfig.gameBoardHeight;
+
+            return breakoutGameController;
+        }
+
+        private void CreateCamera(
             BreakoutGameController breakoutGameController,
             CameraConfig cameraConfig)
         {
             var cameraRigGameObject = Instantiate(_cameraRigPrefab);
+            cameraRigGameObject.name = _cameraRigPrefab.name;
             var cameraRig = cameraRigGameObject.GetComponent<CameraRigController>();
             cameraRig.BaseCameraPosition = cameraConfig.baseCameraPosition;
             cameraRig.BaseCameraRotation = cameraConfig.baseCameraRotation;     
             
-            breakoutGameController.SetCameraRig(cameraRig);
+            breakoutGameController.AssignCameraRig(cameraRig);
         }
 
-        private void InstantiateWalls(
+        private void CreateWalls(
             BreakoutGameController breakoutGameController,
             GameBoardConfig gameBoardConfig)
         {
@@ -87,6 +105,19 @@ namespace BreakoutGame
             wallTransform.localScale = new Vector3(wallConfig.width, 1.0f, 1.0f);
 
             breakoutGameController.AddWall(wall);
+        }
+
+        private void CreatePaddle(
+            BreakoutGameController breakoutGameController,
+            PaddleConfig paddleConfig)
+        {
+            var paddleGameObject = Instantiate(_paddlePrefab);
+            paddleGameObject.name = _paddlePrefab.name;
+            var paddle = paddleGameObject.GetComponent<Paddle>();
+
+            paddle.SetWidth(paddleConfig.paddleWidth);
+
+            breakoutGameController.AssignPaddle(paddle);
         }
     }
 }

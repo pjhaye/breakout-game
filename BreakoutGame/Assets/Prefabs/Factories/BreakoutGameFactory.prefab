@@ -57,3 +57,5 @@ MonoBehaviour:
     type: 2}
   _cameraRigPrefab: {fileID: 1346737195874878, guid: fe99ac26ac2544e4397fed198a5e8ae6,
     type: 2}
+  _paddlePrefab: {fileID: 1805085892727366, guid: bf5dd0ae3b585b948af461629e7929d0,
+    type: 2}

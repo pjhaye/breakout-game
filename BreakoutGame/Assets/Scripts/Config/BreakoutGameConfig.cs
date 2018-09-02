@@ -9,5 +9,6 @@ namespace BreakoutGame
     {
         public GameBoardConfig gameBoardConfig;
         public CameraConfig cameraConfig;
+        public PaddleConfig paddleConfig;
     }
 }
