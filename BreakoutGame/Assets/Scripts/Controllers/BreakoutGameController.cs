@@ -180,13 +180,29 @@ namespace BreakoutGame
 
         public void CreateBall()
         {
-            _ball = _ballFactory.CreateBall(CurrentLevelConfig.ballConfig);
-            _ball.transform.position = BallStartPosition * UnitSize;
+            var ballConfig = CurrentLevelConfig.ballConfig;
+            _ball = _ballFactory.CreateBall(ballConfig);
+            var startPosition = BallStartPosition;
+            var leftMost = -GameBoardWidth * 0.5f + ballConfig.minBallSpawnXPercent * GameBoardWidth;
+            var rightMost = -GameBoardWidth * 0.5f + ballConfig.maxBallSpawnXPercent * GameBoardWidth;
+            var startX = Random.Range(leftMost, rightMost);
+            startPosition.x = startX;
+            _ball.transform.position = startPosition * UnitSize;
         }
 
-        public void LaunchBallInRandomDirection()
+        public void LaunchBall()
         {
-            LaunchBallInDirectionAtSpeed(Vector3.forward, 10.0f);
+            var ballConfig = CurrentLevelConfig.ballConfig;
+            var angle = Random.Range(
+                ballConfig.minLaunchAngle,
+                ballConfig.maxLaunchAngle);
+            LaunchBallAtAngle(angle, ballConfig.ballLaunchSpeed);
+        }
+
+        public void LaunchBallAtAngle(float angle, float speed)
+        {
+            var launchVector = Quaternion.Euler(0.0f, angle, 0.0f) * Vector3.forward;
+            LaunchBallInDirectionAtSpeed(launchVector, speed);
         }
 
         public void LaunchBallInDirectionAtSpeed(Vector3 direction, float speed)

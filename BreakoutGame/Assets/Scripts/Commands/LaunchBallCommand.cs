@@ -16,7 +16,7 @@ namespace BreakoutGame
 
         public override void Execute()
         {
-            _breakoutGameController.LaunchBallInRandomDirection();            
+            _breakoutGameController.LaunchBall();           
             OnComplete();
         }
     }
