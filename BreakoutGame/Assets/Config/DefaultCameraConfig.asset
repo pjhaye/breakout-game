@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56937a893fe3f5b4aaa5902a6cce5ebd, type: 3}
   m_Name: DefaultCameraConfig
   m_EditorClassIdentifier: 
-  baseCameraPosition: {x: 0, y: 10, z: -8.5}
-  baseCameraRotation: {x: 55, y: 0, z: 0}
+  baseCameraPosition: {x: 0, y: 11.5, z: -5}
+  baseCameraRotation: {x: 70, y: 0, z: 0}
