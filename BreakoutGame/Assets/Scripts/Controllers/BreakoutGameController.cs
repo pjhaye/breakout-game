@@ -20,6 +20,7 @@ namespace BreakoutGame
         private Paddle _paddle;
         private PlayerInputController _playerInputController;
         private int _levelIndex = 0;
+        private Ball _ball;
 
         public LevelConfig[] Levels
         {
@@ -69,6 +70,14 @@ namespace BreakoutGame
             set;
         }
 
+        public Ball Ball
+        {
+            get
+            {
+                return _ball;
+            }
+        }
+
         public float PaddedGameBoardWidth
         {
             get
@@ -114,7 +123,7 @@ namespace BreakoutGame
 
             var ballFactoryGameObject = Instantiate(_ballFactoryPrefab);
             ballFactoryGameObject.name = _ballFactoryPrefab.name;
-            _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();
+            _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();            
         }
 
         private void Start()
@@ -161,8 +170,8 @@ namespace BreakoutGame
 
         public void CreateBall()
         {
-            var ball = _ballFactory.CreateBall(CurrentLevelConfig.ballConfig);
-            ball.transform.position = BallStartPosition * UnitSize;
+            _ball = _ballFactory.CreateBall(CurrentLevelConfig.ballConfig);
+            _ball.transform.position = BallStartPosition * UnitSize;
         }
 
         public void ClearBricks()
