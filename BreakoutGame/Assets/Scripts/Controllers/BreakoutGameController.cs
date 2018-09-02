@@ -129,7 +129,17 @@ namespace BreakoutGame
         private void Start()
         {
             GenerateLevel(CurrentLevelConfig);
-            CreateBall();
+            StartBallLaunchSequence();
+        }
+
+        public void StartBallLaunchSequence()
+        {
+            var sequence = new CommandSequence();
+            sequence.AddCommand(new DelayCommand(1.0f, this));
+            sequence.AddCommand(new CreateBallCommand(this));
+            sequence.AddCommand(new DelayCommand(1.0f, this));
+            sequence.AddCommand(new LaunchBallCommand(this));
+            sequence.Execute();
         }
 
         public void GenerateLevel(LevelConfig levelConfig)
@@ -172,6 +182,17 @@ namespace BreakoutGame
         {
             _ball = _ballFactory.CreateBall(CurrentLevelConfig.ballConfig);
             _ball.transform.position = BallStartPosition * UnitSize;
+        }
+
+        public void LaunchBallInRandomDirection()
+        {
+            LaunchBallInDirectionAtSpeed(Vector3.forward, 10.0f);
+        }
+
+        public void LaunchBallInDirectionAtSpeed(Vector3 direction, float speed)
+        {
+            var launchVector = direction.normalized * speed;
+            _ball.Launch(launchVector);
         }
 
         public void ClearBricks()
