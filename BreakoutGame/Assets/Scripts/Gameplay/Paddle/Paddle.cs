@@ -78,6 +78,7 @@ namespace BreakoutGame
 
         public void OnAxisInput(Vector2 axis)
         {
+            axis.y = 0.0f;            
             PaddleMovement.AccelerateInDirection(axis, Time.deltaTime);
         }
     }
