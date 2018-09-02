@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace BreakoutGame
 {
-    [CreateAssetMenu()]
     public class BrickConfig
     {
         public float width;
