@@ -114,6 +114,9 @@ namespace BreakoutGame
             var paddleGameObject = Instantiate(_paddlePrefab);
             paddleGameObject.name = _paddlePrefab.name;
             var paddle = paddleGameObject.GetComponent<Paddle>();
+            paddle.XExtents = new Vector2(
+                -breakoutGameController.GameBoardWidth * 0.5f,
+                breakoutGameController.GameBoardWidth * 0.5f);
 
             paddle.SetWidth(paddleConfig.paddleWidth);
 

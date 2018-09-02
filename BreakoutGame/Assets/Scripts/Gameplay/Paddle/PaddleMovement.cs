@@ -17,6 +17,11 @@ namespace BreakoutGame
         [SerializeField]
         private bool _autoDeccelerate = true;
 
+        
+        private bool _movedLastFrame = false;
+        private Vector3 _velocity = Vector3.zero;
+        private Rigidbody _rigidbody;
+
         public float MaximumSpeed
         {
             get
@@ -63,11 +68,7 @@ namespace BreakoutGame
             {
                 _autoDeccelerate = value;
             }
-        }
-
-        private bool _movedLastFrame = false;
-        private Vector3 _velocity = Vector3.zero;
-        private Rigidbody _rigidbody;        
+        }        
 
         private void Start()
         {
@@ -86,9 +87,9 @@ namespace BreakoutGame
             }
             var delta = (_velocity * Time.deltaTime);
             var newPosition = _rigidbody.position + delta;
-            _rigidbody.MovePosition(newPosition);
+            _rigidbody.position = newPosition;
         }
-
+        
         private void LateUpdate()
         {            
             _movedLastFrame = false;            
