@@ -44,6 +44,8 @@ namespace BreakoutGame
             var gameBoardConfig = config.gameBoardConfig;
             breakoutGameController.GameBoardWidth = gameBoardConfig.gameBoardWidth;
             breakoutGameController.GameBoardHeight = gameBoardConfig.gameBoardHeight;
+            breakoutGameController.HorizontalPaddingPercent = gameBoardConfig.horizontalPaddingPercent;
+            breakoutGameController.VerticalPaddingPercent = gameBoardConfig.verticalPaddingPercent;
             breakoutGameController.UnitSize = config.gameBoardConfig.unitSize;
 
             return breakoutGameController;
@@ -67,7 +69,7 @@ namespace BreakoutGame
             GameBoardConfig gameBoardConfig)
         {
             var gameBoardWidthHalf = gameBoardConfig.gameBoardWidth * 0.5f;
-            var gameBoardHeightHalf = gameBoardConfig.gameBoardWidth * 0.5f;
+            var gameBoardHeightHalf = gameBoardConfig.gameBoardHeight * 0.5f;
 
             var leftWallConfig = new WallConfig
             {

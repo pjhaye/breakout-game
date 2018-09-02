@@ -35,10 +35,11 @@ namespace BreakoutGame
         {
             var unitSize = breakoutGameController.UnitSize;
             var numColumns = rowConfig.numColumns;
-            var baseWidth = (breakoutGameController.GameBoardWidth / rowConfig.numColumns);
+            var baseWidth = (breakoutGameController.PaddedGameBoardWidth / rowConfig.numColumns);
             var brickTopCenterPosition = _levelConfig.brickTopCenterPosition * unitSize;
             var y = (rowIndex * unitSize + brickTopCenterPosition.y);
-            var startX = -(breakoutGameController.GameBoardWidth * 0.5f + brickTopCenterPosition.x) * unitSize;
+            var startX = -(breakoutGameController.PaddedGameBoardWidth * 0.5f + brickTopCenterPosition.x) * unitSize;
+            Debug.Log(breakoutGameController.PaddedGameBoardWidth + " : "  + breakoutGameController.GameBoardWidth);
             for (var i = 0; i < numColumns; i++)
             {
                 var x = startX + (i * baseWidth * unitSize) + (baseWidth * 0.5f * unitSize);

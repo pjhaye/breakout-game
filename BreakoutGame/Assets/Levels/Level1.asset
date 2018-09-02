@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72ea014b2f6ac04892d51eaa225e4ab, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  brickTopCenterPosition: {x: 0, y: -12}
+  brickTopCenterPosition: {x: 0, y: -11.5}
   rowConfigs:
   - numColumns: 11
     brickSpawnRuleConfigs:

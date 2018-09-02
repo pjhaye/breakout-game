@@ -41,10 +41,38 @@ namespace BreakoutGame
             set;
         }
 
+        public float HorizontalPaddingPercent
+        {
+            get;
+            set;
+        }
+
+        public float VerticalPaddingPercent
+        {
+            get;
+            set;
+        }
+
         public float UnitSize
         {
             get;
             set;
+        }
+
+        public float PaddedGameBoardWidth
+        {
+            get
+            {
+                return GameBoardWidth - (GameBoardWidth * HorizontalPaddingPercent);
+            }
+        }
+
+        public float PaddedGameBoardHeight
+        {
+            get
+            {
+                return GameBoardHeight - (GameBoardHeight * VerticalPaddingPercent);
+            }
         }
 
         private void Awake()

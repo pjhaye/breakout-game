@@ -13,4 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameBoardWidth: 25
   gameBoardHeight: 25
+  horizontalPaddingPercent: 0.025
+  verticalPaddingPercent: 0.05
   unitSize: 0.5
