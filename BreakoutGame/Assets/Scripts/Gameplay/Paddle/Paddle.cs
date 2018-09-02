@@ -6,18 +6,20 @@ namespace BreakoutGame
 {
     public class Paddle : MonoBehaviour, IPlayerControllable
     {
+        private PaddleMovement _paddleMovement;
 
-        // Use this for initialization
-        void Start()
+        public PaddleMovement PaddleMovement
         {
-
+            get
+            {
+                return _paddleMovement;
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Awake()
         {
-
-        }
+            _paddleMovement = GetComponent<PaddleMovement>();
+        }        
 
         public void SetWidth(float value)
         {
@@ -26,7 +28,7 @@ namespace BreakoutGame
 
         public void OnAxisInput(Vector2 axis)
         {
-            
+            PaddleMovement.AccelerateInDirection(axis, Time.deltaTime);
         }
     }
 }

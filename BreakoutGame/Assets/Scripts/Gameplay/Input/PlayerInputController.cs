@@ -31,7 +31,7 @@ namespace BreakoutGame
             }
         }
 
-        void Update()
+        void FixedUpdate()
         {
             Target.OnAxisInput(LeftAxis);
         }
