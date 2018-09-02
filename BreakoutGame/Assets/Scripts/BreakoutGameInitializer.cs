@@ -10,6 +10,8 @@ namespace BreakoutGame
         private BreakoutGameConfig _config;
         [SerializeField]
         private GameObject _breakoutGameFactoryPrefab;
+        [SerializeField]
+        private LevelConfig[] _levels;
 
         private BreakoutGameFactory _breakoutGameFactory;
 
@@ -23,7 +25,7 @@ namespace BreakoutGame
             _breakoutGameFactory = breakoutGameFactoryGameObject
                 .GetComponent<BreakoutGameFactory>();
 
-            _breakoutGameFactory.CreateBreakoutGame(_config);
+            _breakoutGameFactory.CreateBreakoutGame(_config, _levels);
 
             Destroy(gameObject);
         }

@@ -7,6 +7,7 @@ namespace BreakoutGame
     public class BrickConfig
     {
         public float width;
-        public BrickColor color;   
+        public BrickColor color;
+        public float unitSize = 1.0f;
     }
 }

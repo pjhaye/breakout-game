@@ -13,5 +13,10 @@ namespace BreakoutGame
         {
             _baseMeshRenderer.material = material;
         }
+
+        public void SetSize(float unitSize, float width)
+        {
+            transform.localScale = new Vector3(unitSize * width, unitSize, unitSize);
+        }
     }
 }

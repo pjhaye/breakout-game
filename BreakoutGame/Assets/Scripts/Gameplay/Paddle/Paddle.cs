@@ -8,6 +8,7 @@ namespace BreakoutGame
     {
         private PaddleMovement _paddleMovement;
         private Vector2 _xExtents = new Vector2(-5, 5);
+        private float _unitSize = 1.0f;
         private float _width = 2.0f;
         private Rigidbody _rigidbody;
 
@@ -43,6 +44,18 @@ namespace BreakoutGame
             }
         }
 
+        public float UnitSize
+        {
+            get
+            {
+                return _unitSize;
+            }
+            set
+            {
+                _unitSize = value;
+            }
+        }
+
         private void Awake()
         {
             _paddleMovement = GetComponent<PaddleMovement>();
@@ -57,23 +70,25 @@ namespace BreakoutGame
         private void ProcessPositionConstraints()
         {
             var position = _rigidbody.position;
-            var left = position.x - Width * 0.5f;
-            var right = position.x + Width * 0.5f;
+            var unitWidth = (Width * _unitSize);
+            var left = position.x - unitWidth * 0.5f;
+            var right = position.x + unitWidth * 0.5f;
             if (left < XExtents.x)
             {
-                position.x = XExtents.x + Width * 0.5f;
+                position.x = XExtents.x + unitWidth * 0.5f;
             }
             else if(right > XExtents.y)
             {
-                position.x = XExtents.y - Width * 0.5f;
+                position.x = XExtents.y - unitWidth * 0.5f;
             }
             _rigidbody.position = position;
         }
 
-        public void SetWidth(float value)
+        public void SetWidth(float unitSize, float width)
         {
-            Width = value;
-            transform.localScale = new Vector3(value, 1.0f, 1.0f);
+            Width = width;
+            UnitSize = unitSize;
+            transform.localScale = new Vector3(unitSize * width, unitSize, unitSize);
         }
 
         public void OnAxisInput(Vector2 axis)

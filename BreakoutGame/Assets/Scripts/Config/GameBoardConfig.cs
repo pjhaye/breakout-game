@@ -8,6 +8,7 @@ namespace BreakoutGame
     public class GameBoardConfig : ScriptableObject
     {
         public int gameBoardWidth;
-        public int gameBoardHeight;              
+        public int gameBoardHeight;
+        public float unitSize = 1.0f;
     }
 }

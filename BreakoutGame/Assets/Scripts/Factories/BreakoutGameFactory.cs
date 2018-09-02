@@ -16,11 +16,11 @@ namespace BreakoutGame
         [SerializeField]
         private GameObject _cameraRigPrefab;
         [SerializeField]
-        private GameObject _paddlePrefab;
+        private GameObject _paddlePrefab;        
 
-        public BreakoutGameController CreateBreakoutGame(BreakoutGameConfig config)
+        public BreakoutGameController CreateBreakoutGame(BreakoutGameConfig config, LevelConfig[] levels)
         {
-            var breakoutGameController = InstantiateBreakoutGame(config);
+            var breakoutGameController = InstantiateBreakoutGame(config, levels);
 
             var gameBoardConfig = config.gameBoardConfig;
             CreateWalls(breakoutGameController, gameBoardConfig);
@@ -34,15 +34,17 @@ namespace BreakoutGame
             return breakoutGameController;
         }
 
-        private BreakoutGameController InstantiateBreakoutGame(BreakoutGameConfig config)
+        private BreakoutGameController InstantiateBreakoutGame(BreakoutGameConfig config, LevelConfig[] levels)
         {
             var breakoutGameObject = Instantiate(_breakoutGamePrefab);
             var breakoutGameController = breakoutGameObject.GetComponent<BreakoutGameController>();
-            breakoutGameObject.name = _breakoutGamePrefab.name;
+            breakoutGameController.Levels = levels;
+            breakoutGameObject.name = _breakoutGamePrefab.name;            
 
             var gameBoardConfig = config.gameBoardConfig;
             breakoutGameController.GameBoardWidth = gameBoardConfig.gameBoardWidth;
             breakoutGameController.GameBoardHeight = gameBoardConfig.gameBoardHeight;
+            breakoutGameController.UnitSize = config.gameBoardConfig.unitSize;
 
             return breakoutGameController;
         }
@@ -124,10 +126,12 @@ namespace BreakoutGame
             var wall = wallGameObject.GetComponent<Wall>();
             wall.WallType = wallConfig.wallType;
 
+            var unitSize = breakoutGameController.UnitSize;
+
             var wallTransform = wallGameObject.transform;
-            wallTransform.localPosition = new Vector3(wallConfig.x, 0.0f, wallConfig.y);
+            wallTransform.localPosition = new Vector3(wallConfig.x * unitSize, 0.0f, wallConfig.y * unitSize);
             wallTransform.localRotation = Quaternion.Euler(0.0f, wallConfig.angle, 0.0f);
-            wallTransform.localScale = new Vector3(wallConfig.width, 1.0f, 1.0f);
+            wallTransform.localScale = new Vector3(wallConfig.width * unitSize, unitSize, unitSize);
 
             breakoutGameController.AddWall(wall);
         }
@@ -140,10 +144,12 @@ namespace BreakoutGame
             wallGameObject.name = _cornerPiecePrefab.name;
             var wall = wallGameObject.GetComponent<Wall>();
 
+            var unitSize = breakoutGameController.UnitSize;
+
             var wallTransform = wallGameObject.transform;
-            wallTransform.localPosition = new Vector3(cornerConfig.x, 0.0f, cornerConfig.y);
+            wallTransform.localPosition = new Vector3(cornerConfig.x * unitSize, 0.0f, cornerConfig.y * unitSize);
             wallTransform.localRotation = Quaternion.Euler(0.0f, cornerConfig.angle, 0.0f);
-            wallTransform.localScale = new Vector3(cornerConfig.size, 1.0f, cornerConfig.size);
+            wallTransform.localScale = new Vector3(cornerConfig.size * unitSize, unitSize, cornerConfig.size * unitSize);
 
             breakoutGameController.AddWall(wall);
         }
@@ -155,11 +161,14 @@ namespace BreakoutGame
             var paddleGameObject = Instantiate(_paddlePrefab);
             paddleGameObject.name = _paddlePrefab.name;
             var paddle = paddleGameObject.GetComponent<Paddle>();
-            paddle.XExtents = new Vector2(
-                -breakoutGameController.GameBoardWidth * 0.5f,
-                breakoutGameController.GameBoardWidth * 0.5f);
 
-            paddle.SetWidth(paddleConfig.paddleWidth);
+            var unitSize = breakoutGameController.UnitSize;
+
+            paddle.XExtents = new Vector2(
+                -breakoutGameController.GameBoardWidth * 0.5f * unitSize,
+                breakoutGameController.GameBoardWidth * 0.5f * unitSize);
+
+            paddle.SetWidth(unitSize, paddleConfig.paddleWidth);
 
             breakoutGameController.AssignPaddle(paddle);
         }

@@ -11,5 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a03b533c9c8024f84a46bf199194d3, type: 3}
   m_Name: DefaultGameBoardConfig
   m_EditorClassIdentifier: 
-  gameBoardWidth: 10
-  gameBoardHeight: 10
+  gameBoardWidth: 25
+  gameBoardHeight: 25
+  unitSize: 0.5

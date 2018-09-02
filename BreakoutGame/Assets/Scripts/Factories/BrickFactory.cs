@@ -14,14 +14,10 @@ namespace BreakoutGame
         public Brick CreateBrick(BrickConfig brickConfig)
         {
             var brickGameObject = Instantiate(_brickPrefab);
-            brickGameObject.name = _brickPrefab.name;
-            brickGameObject.transform.localScale = 
-                new Vector3(
-                    brickConfig.width, 
-                    1.0f, 
-                    1.0f);
+            brickGameObject.name = _brickPrefab.name;            
 
             var brick = brickGameObject.GetComponent<Brick>();
+            brick.SetSize(brickConfig.unitSize, brickConfig.width);
             var material = GetMaterialFromBrickColor(brickConfig.color);
             brick.SetMaterial(material);
             return brick;
