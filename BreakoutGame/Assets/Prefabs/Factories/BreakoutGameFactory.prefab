@@ -53,3 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _breakoutGamePrefab: {fileID: 1186173538642648, guid: b930efa21d0e3e843b05cd24ebd79faa,
     type: 2}
+  _wallPrefab: {fileID: 1679805489484260, guid: f209a50bc006a8947be909436e4f856c,
+    type: 2}

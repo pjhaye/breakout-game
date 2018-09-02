@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakoutGameController : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+namespace BreakoutGame
+{
+    public class BreakoutGameController : MonoBehaviour
+    {                
+        public void AddWall(Wall wall)
+        {
+            wall.transform.SetParent(transform, true);
+        }
+    }
 }

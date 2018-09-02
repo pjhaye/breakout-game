@@ -18,7 +18,7 @@ namespace BreakoutGame
                 var gameObject = Instantiate(prefabToInstantiate);
                 gameObject.name = prefabToInstantiate.name;
             }
-            GameObject.Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 } 
