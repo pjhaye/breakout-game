@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: DefaultGameBoardConfig
   m_EditorClassIdentifier: 
   gameBoardWidth: 25
-  gameBoardHeight: 25
-  horizontalPaddingPercent: 0.025
-  verticalPaddingPercent: 0.05
+  gameBoardHeight: 18
+  horizontalPaddingPercent: 0.015
+  verticalPaddingPercent: 0.075
   unitSize: 0.5
