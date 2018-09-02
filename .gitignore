@@ -2,3 +2,4 @@ BreakoutGame/Library/
 BreakoutGame/Temp/
 BreakoutGame/.vs/
 BreakoutGame/obj/
+*.csproj
