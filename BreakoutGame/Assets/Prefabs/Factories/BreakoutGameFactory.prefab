@@ -55,6 +55,8 @@ MonoBehaviour:
     type: 2}
   _wallPrefab: {fileID: 1679805489484260, guid: f209a50bc006a8947be909436e4f856c,
     type: 2}
+  _cornerPiecePrefab: {fileID: 1808495016864722, guid: bf361f41ed2acb747ba2fc5c1c744cc6,
+    type: 2}
   _cameraRigPrefab: {fileID: 1346737195874878, guid: fe99ac26ac2544e4397fed198a5e8ae6,
     type: 2}
   _paddlePrefab: {fileID: 1805085892727366, guid: bf5dd0ae3b585b948af461629e7929d0,

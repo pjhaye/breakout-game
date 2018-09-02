@@ -12,6 +12,8 @@ namespace BreakoutGame
         [SerializeField]
         private GameObject _wallPrefab;
         [SerializeField]
+        private GameObject _cornerPiecePrefab;
+        [SerializeField]
         private GameObject _cameraRigPrefab;
         [SerializeField]
         private GameObject _paddlePrefab;
@@ -62,32 +64,55 @@ namespace BreakoutGame
             BreakoutGameController breakoutGameController,
             GameBoardConfig gameBoardConfig)
         {
+            var gameBoardWidthHalf = gameBoardConfig.gameBoardWidth * 0.5f;
+            var gameBoardHeightHalf = gameBoardConfig.gameBoardWidth * 0.5f;
+
             var leftWallConfig = new WallConfig
             {
-                x = -gameBoardConfig.gameBoardWidth * 0.5f,
+                x = -gameBoardWidthHalf,
                 angle = 90.0f,
-                width = gameBoardConfig.gameBoardHeight + 2.0f,
+                width = gameBoardConfig.gameBoardHeight,
                 wallType = WallType.Left
             };
             CreateWall(breakoutGameController, leftWallConfig);
 
             var rightWallConfig = new WallConfig
             {
-                x = gameBoardConfig.gameBoardWidth * 0.5f,
+                x = gameBoardWidthHalf,
                 angle = -90.0f,
-                width = gameBoardConfig.gameBoardHeight + 2.0f,
+                width = gameBoardConfig.gameBoardHeight,
                 wallType = WallType.Right
             };
             CreateWall(breakoutGameController, rightWallConfig);
 
             var topWallConfig = new WallConfig
             {
-                y = gameBoardConfig.gameBoardHeight * 0.5f,
+                y = gameBoardHeightHalf,
                 angle = 180.0f,
                 width = gameBoardConfig.gameBoardWidth,
                 wallType = WallType.Top
             };
             CreateWall(breakoutGameController, topWallConfig);
+
+            var leftCornerConfig = new CornerConfig
+            {
+                x = -gameBoardWidthHalf,
+                y = gameBoardHeightHalf,
+                angle = 180.0f,
+                size = 1.0f
+
+            };
+            CreateCorner(breakoutGameController, leftCornerConfig);
+
+            var rightCornerConfig = new CornerConfig
+            {
+                x = gameBoardWidthHalf,
+                y = gameBoardHeightHalf,
+                angle = 270.0f,
+                size = 1.0f
+
+            };
+            CreateCorner(breakoutGameController, rightCornerConfig);
         }
 
         private void CreateWall(
@@ -103,6 +128,22 @@ namespace BreakoutGame
             wallTransform.localPosition = new Vector3(wallConfig.x, 0.0f, wallConfig.y);
             wallTransform.localRotation = Quaternion.Euler(0.0f, wallConfig.angle, 0.0f);
             wallTransform.localScale = new Vector3(wallConfig.width, 1.0f, 1.0f);
+
+            breakoutGameController.AddWall(wall);
+        }
+
+        private void CreateCorner(
+            BreakoutGameController breakoutGameController,
+            CornerConfig cornerConfig)
+        {
+            var wallGameObject = Instantiate(_cornerPiecePrefab);
+            wallGameObject.name = _cornerPiecePrefab.name;
+            var wall = wallGameObject.GetComponent<Wall>();
+
+            var wallTransform = wallGameObject.transform;
+            wallTransform.localPosition = new Vector3(cornerConfig.x, 0.0f, cornerConfig.y);
+            wallTransform.localRotation = Quaternion.Euler(0.0f, cornerConfig.angle, 0.0f);
+            wallTransform.localScale = new Vector3(cornerConfig.size, 1.0f, cornerConfig.size);
 
             breakoutGameController.AddWall(wall);
         }
