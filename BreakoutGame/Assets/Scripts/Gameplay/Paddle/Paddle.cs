@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace BreakoutGame
 {
-    public class Paddle : MonoBehaviour, IPlayerControllable
+    public class Paddle : 
+        MonoBehaviour, 
+        IPlayerControllable, 
+        IBallHittable
     {
         private PaddleMovement _paddleMovement;
         private Vector2 _xExtents = new Vector2(-5, 5);
@@ -110,6 +113,11 @@ namespace BreakoutGame
         {
             axis.y = 0.0f;            
             PaddleMovement.AccelerateInDirection(axis, Time.deltaTime);
+        }
+
+        public void OnHitByBall(Ball ball)
+        {
+            Debug.Log("Paddle.OnHitByBall()");
         }
     }
 }

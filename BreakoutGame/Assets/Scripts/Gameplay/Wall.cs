@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BreakoutGame
 {    
-    public class Wall : MonoBehaviour
+    public class Wall : MonoBehaviour, IBallHittable
     {
         private WallType _wallType;
         public WallType WallType
@@ -19,5 +19,9 @@ namespace BreakoutGame
             }
         }
 
+        public void OnHitByBall(Ball ball)
+        {
+            Debug.Log("Wall.OnHitByBall()");
+        }
     }
 }

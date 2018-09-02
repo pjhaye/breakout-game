@@ -22,5 +22,17 @@ namespace BreakoutGame
         {
             _rigidbody.velocity = velocity;
         }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            var ballHittable = other.gameObject.GetComponent<IBallHittable>();
+            var isHittable = ballHittable != null;
+            if(!isHittable)
+            {
+                return;
+            }
+
+            ballHittable.OnHitByBall(this);
+        }
     }
 }

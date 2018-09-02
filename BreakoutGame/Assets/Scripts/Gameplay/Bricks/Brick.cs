@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BreakoutGame
 {
-    public class Brick : MonoBehaviour
+    public class Brick : MonoBehaviour, IBallHittable
     {
         [SerializeField]
         private MeshRenderer _baseMeshRenderer;
@@ -23,6 +23,11 @@ namespace BreakoutGame
         {
             var meshTransform = _baseMeshRenderer.gameObject.transform;
             meshTransform.localScale = new Vector3(scale, scale, scale);
+        }
+
+        public void OnHitByBall(Ball ball)
+        {
+            Debug.Log("Brick.OnHitByBall()");
         }
     }
 }
