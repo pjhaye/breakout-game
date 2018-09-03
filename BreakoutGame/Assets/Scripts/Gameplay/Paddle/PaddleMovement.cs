@@ -16,7 +16,6 @@ namespace BreakoutGame
         private float _decceleration = 1.0f;
         [SerializeField]
         private bool _autoDeccelerate = true;
-
         
         private bool _movedLastFrame = false;
         private Vector3 _velocity = Vector3.zero;
