@@ -226,8 +226,18 @@ namespace BreakoutGame
             ScoreController.ResetScore();
             LevelController.Reset();
             LivesController.ResetLives();
+            ResetPaddlePosition();
             ClearBricks();
             GenerateCurrentLevel();            
+        }
+
+        private void ResetPaddlePosition()
+        {
+            _paddle.transform.localPosition =
+                new Vector3(
+                    0.0f,
+                    0.0f,
+                    -GameBoardHeight * 0.5f * UnitSize + UnitSize * 0.5f);
         }
 
         private void CreateHud()
@@ -346,6 +356,7 @@ namespace BreakoutGame
             _paddle.transform.SetParent(transform);            
             _playerInputController.Target = _paddle;
             SetPlayerInputEnabled(false);
+            ResetPaddlePosition();
         }        
 
         public void CreateBall()
