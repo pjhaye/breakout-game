@@ -10,6 +10,8 @@ namespace BreakoutGame
         private LivesUi _livesUi;
         [SerializeField]
         private ScoreUi _scoreUi;
+        [SerializeField]
+        private LevelUi _levelUi;
 
         public LivesUi LivesUi
         {
@@ -24,6 +26,14 @@ namespace BreakoutGame
             get
             {
                 return _scoreUi;
+            }
+        }
+
+        public LevelUi LevelUi
+        {
+            get
+            {
+                return _levelUi;
             }
         }
     }

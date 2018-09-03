@@ -189,6 +189,7 @@ namespace BreakoutGame
             _hudUi = hudGameObject.GetComponent<HudUi>();            
             _hudUi.LivesUi.LivesController = LivesController;
             _hudUi.ScoreUi.ScoreController = ScoreController;
+            _hudUi.LevelUi.LevelController = LevelController;
         }
 
         private void Update()

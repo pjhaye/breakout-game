@@ -51,7 +51,7 @@ namespace BreakoutGame
             var gameplayConfig = config.gameplayConfig;
             breakoutGameController.LivesController.DefaultLives = gameplayConfig.numLives;
 
-            breakoutGameController.LevelController.Levels = levels;
+            breakoutGameController.LevelController.Levels = levels;            
 
             return breakoutGameController;
         }
