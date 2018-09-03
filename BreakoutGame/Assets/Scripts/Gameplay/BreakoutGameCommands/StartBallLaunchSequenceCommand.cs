@@ -5,13 +5,12 @@ using UnityEngine.Experimental.UIElements;
 
 namespace BreakoutGame
 {
-    public class StartBallLaunchSequenceCommand: Command
+    public class StartBallLaunchSequenceCommand: BreakoutGameCommand
     {
-        private readonly BreakoutGameController _breakoutGameController;
-
-        public StartBallLaunchSequenceCommand(BreakoutGameController breakoutGameController)
+        public StartBallLaunchSequenceCommand(BreakoutGameController breakoutGameController) :
+            base(breakoutGameController)
         {
-            _breakoutGameController = breakoutGameController;
+
         }
 
         public override void Execute()

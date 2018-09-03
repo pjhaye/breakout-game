@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace BreakoutGame
 {
-    public class RemoveLifeCommand : Command
+    public class RemoveLifeCommand : BreakoutGameCommand
     {
-        private BreakoutGameController _breakoutGameController;
-
-        public RemoveLifeCommand(BreakoutGameController breakoutGameController)
+        public RemoveLifeCommand(BreakoutGameController breakoutGameController) :
+            base(breakoutGameController)
         {
-            _breakoutGameController = breakoutGameController;
+
         }
 
         public override void Execute()

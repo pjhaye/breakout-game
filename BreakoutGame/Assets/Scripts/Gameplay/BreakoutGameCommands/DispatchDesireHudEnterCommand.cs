@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace BreakoutGame
 {
-    public class DispatchDesireHudEnterCommand : Command
+    public class DispatchDesireHudEnterCommand : BreakoutGameCommand
     {
-        private BreakoutGameController _breakoutGameController;
-
-        public DispatchDesireHudEnterCommand(BreakoutGameController breakoutGameController)
+        public DispatchDesireHudEnterCommand(BreakoutGameController breakoutGameController) :
+            base(breakoutGameController)
         {
-            _breakoutGameController = breakoutGameController;
+
         }
 
         public override void Execute()

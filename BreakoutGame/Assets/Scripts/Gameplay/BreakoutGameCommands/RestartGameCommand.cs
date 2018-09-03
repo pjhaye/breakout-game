@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace BreakoutGame
 {
-    public class RestartGameCommand : Command
+    public class RestartGameCommand : BreakoutGameCommand
     {
-        private BreakoutGameController _breakoutGameController;
-
-        public RestartGameCommand(BreakoutGameController breakoutGameController)
+        public RestartGameCommand(BreakoutGameController breakoutGameController) :
+            base(breakoutGameController)
         {
-            _breakoutGameController = breakoutGameController;
+
         }
 
         public override void Execute()

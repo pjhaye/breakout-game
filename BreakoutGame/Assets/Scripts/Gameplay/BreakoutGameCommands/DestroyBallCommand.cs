@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace BreakoutGame
 {
-    public class DestroyBallCommand : Command
+    public class DestroyBallCommand : BreakoutGameCommand
     {
-        private readonly BreakoutGameController _breakoutGameController;
-
-        public DestroyBallCommand(BreakoutGameController breakoutGameController)
+        public DestroyBallCommand(BreakoutGameController breakoutGameController) :
+            base(breakoutGameController)
         {
-            _breakoutGameController = breakoutGameController;
+
         }
 
         public override void Execute()

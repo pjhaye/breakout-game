@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace BreakoutGame
 {
-    public class AdvanceLevelCommand : Command
+    public class AdvanceLevelCommand : BreakoutGameCommand
     {
-        private readonly BreakoutGameController _breakoutGameController;
-
-        public AdvanceLevelCommand(BreakoutGameController breakoutGameController)
+        public AdvanceLevelCommand(BreakoutGameController breakoutGameController) :
+            base(breakoutGameController)
         {
-            _breakoutGameController = breakoutGameController;
+
         }
 
         public override void Execute()
