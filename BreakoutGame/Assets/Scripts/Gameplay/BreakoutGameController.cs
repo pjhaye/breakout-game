@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BreakoutGame.BreakoutGameStates;
 using UnityEngine;
+using System;
 
 namespace BreakoutGame
 {
@@ -13,6 +14,12 @@ namespace BreakoutGame
         private GameObject _ballFactoryPrefab;
         [SerializeField]
         private GameObject _hudPrefab;
+        [SerializeField]
+        private GameObject _startUiPrefab;
+
+        public event Action RestartedGame;
+        public event Action DesiredHudEnter;
+        public event Action DesiredHudExit;
 
         private LevelConfig[] _levels;
         private BallFailDetector _ballFailDetector;
@@ -28,7 +35,7 @@ namespace BreakoutGame
         private LevelController _levelController;
         private Ball _ball;
         private BreakoutGameStateMachine _stateMachine;
-        private HudUi _hudUi;        
+        private HudUi _hudUi;            
 
         public LivesController LivesController
         {
@@ -179,9 +186,33 @@ namespace BreakoutGame
         {
             State = new GameplayState(this);
             CreateHud();
+            CreateStartScreen();
             ResetLives();
-            GenerateLevel(CurrentLevelConfig);
-            StartBallLaunchSequence();                   
+            GenerateLevel(CurrentLevelConfig);            
+            StartIntroSequence();            
+        }
+
+        private void StartIntroSequence()
+        {
+            var sequence = new CommandSequence();
+            sequence.AddCommand(new DelayCommand(1.0f, this));
+            sequence.AddCommand(new RestartGameCommand(this));            
+            sequence.Execute();
+        }
+
+        private void CreateStartScreen()
+        {
+            var startGameObject = Instantiate(_startUiPrefab);
+            var startGameUi = startGameObject.GetComponent<StartGameUi>();
+            startGameUi.AssignBreakoutGameController(this);
+        }
+
+        public void RestartGame()
+        {
+            if(RestartedGame != null)
+            {
+                RestartedGame();
+            }
         }
 
         private void CreateHud()
@@ -192,6 +223,7 @@ namespace BreakoutGame
             _hudUi.LivesUi.LivesController = LivesController;
             _hudUi.ScoreUi.ScoreController = ScoreController;
             _hudUi.LevelUi.LevelController = LevelController;
+            _hudUi.AssignBreakoutGameController(this);
         }
 
         private void Update()
@@ -219,9 +251,16 @@ namespace BreakoutGame
             _stateMachine.OnBallFail(ball);
         }
 
+        public void StartGame()
+        {
+            StartBallLaunchSequence();
+        }
+
         public void StartBallLaunchSequence()
         {
             var sequence = new CommandSequence();
+            sequence.AddCommand(new DelayCommand(0.5f, this));
+            sequence.AddCommand(new DispatchDesireHudEnterCommand(this));
             sequence.AddCommand(new DelayCommand(1.0f, this));
             sequence.AddCommand(new CreateBallCommand(this));
             sequence.AddCommand(new DelayCommand(1.0f, this));
@@ -229,7 +268,7 @@ namespace BreakoutGame
             sequence.Execute();
         }
 
-        public void GenerateLevel(LevelConfig levelConfig)
+        private void GenerateLevel(LevelConfig levelConfig)
         {
             _brickGenerator = new BrickGenerator(_brickFactory, levelConfig);
             _brickGenerator.GenerateBricks(this);
@@ -303,7 +342,7 @@ namespace BreakoutGame
 
             var leftMost = -GameBoardWidth * 0.5f + minWidthPercent;
             var rightMost = -GameBoardWidth * 0.5f + maxWidthPercent;
-            var startX = Random.Range(leftMost, rightMost);
+            var startX = UnityEngine.Random.Range(leftMost, rightMost);
             startPosition.x = startX;
             _ball.transform.position = startPosition * UnitSize;
 
@@ -316,7 +355,7 @@ namespace BreakoutGame
         public void LaunchBall()
         {
             var ballConfig = CurrentLevelConfig.ballConfig;
-            var angle = Random.Range(
+            var angle = UnityEngine.Random.Range(
                 ballConfig.minLaunchAngle,
                 ballConfig.maxLaunchAngle);
             LaunchBallAtAngle(angle, ballConfig.ballLaunchSpeed);
@@ -373,7 +412,26 @@ namespace BreakoutGame
 
         private void StartGameOverSequence()
         {
+            var sequence = new CommandSequence();
+            sequence.AddCommand(new DelayCommand(1.0f, this));
+            sequence.AddCommand(new DispatchDesireHudExitCommand(this));            
+            sequence.Execute();
+        }   
+        
+        public void DispatchDesireHudEnter()
+        {
+            if(DesiredHudEnter != null)
+            {
+                DesiredHudEnter();
+            }
+        }
 
+        public void DispatchDesireHudExit()
+        {
+            if (DesiredHudExit != null)
+            {
+                DesiredHudExit();
+            }
         }
 
         public void AdvanceLevel()

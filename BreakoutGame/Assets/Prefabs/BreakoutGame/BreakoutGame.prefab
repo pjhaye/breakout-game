@@ -57,6 +57,8 @@ MonoBehaviour:
   _ballFactoryPrefab: {fileID: 1886119470252072, guid: 628a624675f844c4287ff42c3098b794,
     type: 2}
   _hudPrefab: {fileID: 1463933768742818, guid: f5dc27f8d4ffb11428f04cd0079b4053, type: 2}
+  _startUiPrefab: {fileID: 1450385200587968, guid: 972b6dd6734a7ad4c926ef63863e11a3,
+    type: 2}
 --- !u!114 &114964342401847638
 MonoBehaviour:
   m_ObjectHideFlags: 1

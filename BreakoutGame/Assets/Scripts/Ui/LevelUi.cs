@@ -16,6 +16,11 @@ namespace BreakoutGame
             set;
         }
 
+        private void Start()
+        {
+            UpdateDisplay();
+        }
+
         private void Update()
         {
             UpdateDisplay();
