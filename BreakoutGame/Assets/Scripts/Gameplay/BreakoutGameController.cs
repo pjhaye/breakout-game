@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BreakoutGame.BreakoutGameStates;
 using UnityEngine;
 
 namespace BreakoutGame
@@ -21,6 +22,7 @@ namespace BreakoutGame
         private PlayerInputController _playerInputController;
         private int _levelIndex = 0;
         private Ball _ball;
+        private BreakoutGameStateMachine _stateMachine;
 
         public LevelConfig[] Levels
         {
@@ -121,6 +123,18 @@ namespace BreakoutGame
             }
         }
 
+        public BreakoutGameState State
+        {
+            get
+            {
+                return _stateMachine.State;
+            }
+            set
+            {
+                _stateMachine.State = value;
+            }
+        }
+
         private void Awake()
         {
             _playerInputController = GetComponent<PlayerInputController>();
@@ -131,18 +145,32 @@ namespace BreakoutGame
 
             var ballFactoryGameObject = Instantiate(_ballFactoryPrefab);
             ballFactoryGameObject.name = _ballFactoryPrefab.name;
-            _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();            
+            _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();  
+            
+            _stateMachine = new BreakoutGameStateMachine();            
         }
 
         private void Start()
         {
+            State = new GameplayState(this);
             GenerateLevel(CurrentLevelConfig);
             StartBallLaunchSequence();
+        }
+
+        private void Update()
+        {
+            _stateMachine.Update(Time.deltaTime);
         }
 
         private void FixedUpdate()
         {
             CheckForBallFail();
+            _stateMachine.FixedUpdate(Time.deltaTime);
+        }
+
+        private void LateUpdate()
+        {
+            _stateMachine.LateUpdate(Time.deltaTime);
         }
 
         private void CheckForBallFail()
