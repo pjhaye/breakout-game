@@ -12,19 +12,10 @@ namespace BreakoutGame.BreakoutGameStates
 
         }
 
-        public override void OnEnter()
+        public override void OnBallFail(Ball ball)
         {
-            base.OnEnter();
+            base.OnBallFail(ball);
+            Debug.Log("GameplayState.OnBallFail()");
         }
-
-        public override void OnUpdate(float deltaTime)
-        {
-            base.OnUpdate(deltaTime);
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
-        }        
     }
 }

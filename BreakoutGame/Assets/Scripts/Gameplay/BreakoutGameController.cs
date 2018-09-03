@@ -13,6 +13,7 @@ namespace BreakoutGame
         private GameObject _ballFactoryPrefab;
 
         private LevelConfig[] _levels;
+        private BallFailDetector _ballFailDetector;
         private BrickFactory _brickFactory;
         private BallFactory _ballFactory;
         private BrickGenerator _brickGenerator;
@@ -147,24 +148,28 @@ namespace BreakoutGame
             ballFactoryGameObject.name = _ballFactoryPrefab.name;
             _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();  
             
-            _stateMachine = new BreakoutGameStateMachine();            
+            _stateMachine = new BreakoutGameStateMachine();                        
         }
 
         private void Start()
         {
             State = new GameplayState(this);
             GenerateLevel(CurrentLevelConfig);
-            StartBallLaunchSequence();
+            StartBallLaunchSequence();            
         }
 
         private void Update()
         {
-            _stateMachine.Update(Time.deltaTime);
+            _stateMachine.Update(Time.deltaTime);            
         }
 
         private void FixedUpdate()
         {
-            CheckForBallFail();
+            if (_ballFailDetector != null)
+            {
+                _ballFailDetector.CheckForBallFail();
+            }
+
             _stateMachine.FixedUpdate(Time.deltaTime);
         }
 
@@ -172,22 +177,10 @@ namespace BreakoutGame
         {
             _stateMachine.LateUpdate(Time.deltaTime);
         }
-
-        private void CheckForBallFail()
+       
+        public void OnBallFail(Ball ball)
         {
-            if (_ball != null)
-            {
-                var ballY = _ball.transform.localPosition.z;
-                if (ballY <= BallFailY * UnitSize)
-                {
-                    OnBallFail();
-                }
-            }
-        }
-
-        private void OnBallFail()
-        {
-
+            _stateMachine.OnBallFail(ball);
         }
 
         public void StartBallLaunchSequence()
@@ -246,6 +239,11 @@ namespace BreakoutGame
             var startX = Random.Range(leftMost, rightMost);
             startPosition.x = startX;
             _ball.transform.position = startPosition * UnitSize;
+
+            _ballFailDetector = new BallFailDetector(
+                this,
+                _ball,
+                BallFailY * UnitSize);
         }
 
         public void LaunchBall()
