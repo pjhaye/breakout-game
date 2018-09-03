@@ -15,7 +15,7 @@ namespace BreakoutGame.BreakoutGameStates
         public override void OnBallFail(Ball ball)
         {
             base.OnBallFail(ball);
-            Debug.Log("GameplayState.OnBallFail()");
+            Context.StartLoseLifeSequence();
         }
     }
 }

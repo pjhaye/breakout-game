@@ -21,9 +21,18 @@ namespace BreakoutGame
         private List<Brick> _bricks = new List<Brick>();
         private Paddle _paddle;
         private PlayerInputController _playerInputController;
+        private LivesController _livesController;
         private int _levelIndex = 0;
         private Ball _ball;
         private BreakoutGameStateMachine _stateMachine;
+
+        public LivesController LivesController
+        {
+            get
+            {
+                return _livesController;
+            }
+        }
 
         public LevelConfig[] Levels
         {
@@ -148,14 +157,17 @@ namespace BreakoutGame
             ballFactoryGameObject.name = _ballFactoryPrefab.name;
             _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();  
             
+            _livesController = new LivesController();
+
             _stateMachine = new BreakoutGameStateMachine();                        
         }
 
         private void Start()
         {
             State = new GameplayState(this);
+            ResetLives();
             GenerateLevel(CurrentLevelConfig);
-            StartBallLaunchSequence();            
+            StartBallLaunchSequence();                   
         }
 
         private void Update()
@@ -255,6 +267,16 @@ namespace BreakoutGame
             LaunchBallAtAngle(angle, ballConfig.ballLaunchSpeed);
         }
 
+        public void DestroyBall()
+        {
+            if(_ball == null)
+            {
+                return;
+            }
+            Destroy(_ball.gameObject);
+            _ball = null;
+        }
+
         public void LaunchBallAtAngle(float angle, float speed)
         {
             var launchVector = Quaternion.Euler(0.0f, angle, 0.0f) * Vector3.forward;
@@ -265,6 +287,45 @@ namespace BreakoutGame
         {
             var launchVector = direction.normalized * speed;
             _ball.Launch(launchVector);
+        }
+
+        public void RemoveLife()
+        {
+            LivesController.RemoveLife();
+        }
+
+        public void StartLoseLifeSequence()
+        {
+            Debug.Log("StartLoseLifeSequence");
+            var sequence = new CommandSequence();
+            sequence.AddCommand(new DelayCommand(2.0f, this));
+            sequence.AddCommand(new DestroyBallCommand(this));
+            sequence.AddCommand(new RemoveLifeCommand(this));
+            sequence.AddCommand(new GotoNextLifeCommand(this));
+            sequence.Execute();
+        }
+
+        public void GotoNextLife()
+        {
+            Debug.Log(LivesController.NumLives);
+            if(LivesController.IsOutOfLives)
+            {
+                StartGameOverSequence();
+            }
+            else
+            {
+                StartBallLaunchSequence();
+            }
+        }
+
+        private void StartGameOverSequence()
+        {
+
+        }
+
+        public void ResetLives()
+        {
+            LivesController.ResetLives();
         }
 
         public void ClearBricks()
