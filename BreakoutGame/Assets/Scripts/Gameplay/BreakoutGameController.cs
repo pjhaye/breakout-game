@@ -154,6 +154,22 @@ namespace BreakoutGame
             }
         }
 
+        public int NumBricks
+        {
+            get
+            {
+                return _bricks.Count;
+            }
+        }
+
+        public bool AreAllBricksDestroyed
+        {
+            get
+            {
+                return NumBricks <= 0;
+            }
+        }
+
         private void Awake()
         {
             _playerInputController = GetComponent<PlayerInputController>();
@@ -249,6 +265,29 @@ namespace BreakoutGame
         private void OnBrickDestroy(Brick brick)
         {
             ScoreController.AddScore(brick.Score);
+            _bricks.Remove(brick);
+
+            BeatLevelIfNoBricks();
+        }
+
+        private void BeatLevelIfNoBricks()
+        {
+            if(!AreAllBricksDestroyed)
+            {
+                return;
+            }
+
+            StartLevelCompleteSequence();
+        }
+
+        private void StartLevelCompleteSequence()
+        {
+            var sequence = new CommandSequence();
+            sequence.AddCommand(new DestroyBallCommand(this));
+            sequence.AddCommand(new DelayCommand(2.0f, this));
+            sequence.AddCommand(new AdvanceLevelCommand(this));
+            sequence.AddCommand(new StartBallLaunchSequenceCommand(this));
+            sequence.Execute();
         }
 
         public void AssignCameraRig(CameraRigController value)
@@ -352,6 +391,13 @@ namespace BreakoutGame
         private void StartGameOverSequence()
         {
 
+        }
+
+        public void AdvanceLevel()
+        {
+            LevelController.GotoNextLevel();
+            ClearBricks();
+            GenerateLevel(CurrentLevelConfig);
         }
 
         public void ResetLives()
