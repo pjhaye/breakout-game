@@ -15,4 +15,4 @@ MonoBehaviour:
   maximumSpeed: 13
   acceleration: 100
   decceleration: 150
-  maxBallAngleChange: 30
+  maxBallAngleChange: 25
