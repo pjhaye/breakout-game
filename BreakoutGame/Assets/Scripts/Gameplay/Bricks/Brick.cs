@@ -25,9 +25,12 @@ namespace BreakoutGame
             meshTransform.localScale = new Vector3(scale, scale, scale);
         }
 
-        public void OnHitByBall(Ball ball)
+        public void OnHitByBall(
+            Ball ball, 
+            Vector3 relativeVelocity, 
+            Vector3 contactNormal)
         {
-            Debug.Log("Brick.OnHitByBall()");
+
         }
     }
 }

@@ -14,6 +14,7 @@ namespace BreakoutGame
         private float _unitSize = 1.0f;
         private float _width = 2.0f;
         private Rigidbody _rigidbody;
+        private float _maxBallAngleChange = 15.0f;
 
         public PaddleMovement PaddleMovement
         {
@@ -56,6 +57,18 @@ namespace BreakoutGame
             set
             {
                 _unitSize = value;
+            }
+        }
+
+        public float MaxBallAngleChange
+        {
+            get
+            {
+                return _maxBallAngleChange;
+            }
+            set
+            {
+                _maxBallAngleChange = value;
             }
         }
 
@@ -115,9 +128,23 @@ namespace BreakoutGame
             PaddleMovement.AccelerateInDirection(axis, Time.deltaTime);
         }
 
-        public void OnHitByBall(Ball ball)
+        public void OnHitByBall(
+            Ball ball, 
+            Vector3 relativeVelocity,
+            Vector3 contactNormal)
         {
-            Debug.Log("Paddle.OnHitByBall()");
+            var dot = Vector3.Dot(ball.Velocity.normalized, contactNormal);
+            if (dot > 0.0f)
+            {
+                return;
+            }
+            var reflectedVelocity = Vector3.Reflect(ball.Velocity, contactNormal);
+            ball.Velocity = reflectedVelocity;
+
+            var angleChange = Random.Range(-_maxBallAngleChange, _maxBallAngleChange);
+            var rotation = Quaternion.Euler(0.0f, angleChange, 0.0f);
+            reflectedVelocity = rotation * reflectedVelocity;            
+            ball.Velocity = reflectedVelocity;            
         }
     }
 }

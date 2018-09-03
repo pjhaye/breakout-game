@@ -7,6 +7,19 @@ namespace BreakoutGame
     public class Ball : MonoBehaviour
     {
         private Rigidbody _rigidbody;
+        private Vector3 _velocity;
+
+        public Vector3 Velocity
+        {
+            get
+            {
+                return _velocity;
+            }
+            set
+            {
+                _velocity = value;
+            }
+        }        
 
         private void Awake()
         {
@@ -20,19 +33,24 @@ namespace BreakoutGame
 
         public void Launch(Vector3 velocity)
         {
-            _rigidbody.velocity = velocity;
+            Velocity = velocity;
+        }
+
+        private void FixedUpdate()
+        {
+            _rigidbody.velocity = _velocity;
         }
 
         private void OnCollisionEnter(Collision other)
         {
-            var ballHittable = other.gameObject.GetComponent<IBallHittable>();
-            var isHittable = ballHittable != null;
-            if(!isHittable)
+            var hittables = other.gameObject.GetComponents<IBallHittable>();
+            foreach(var hittable in hittables)
             {
-                return;
-            }
-
-            ballHittable.OnHitByBall(this);
+                hittable.OnHitByBall(
+                    this, 
+                    other.relativeVelocity, 
+                    other.contacts[0].normal);
+            }                        
         }
     }
 }

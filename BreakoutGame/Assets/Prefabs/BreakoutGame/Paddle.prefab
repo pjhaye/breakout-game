@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4033420182653030}
   - component: {fileID: 33094714263548128}
   - component: {fileID: 23706196983464284}
-  - component: {fileID: 65233572692261002}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -40,6 +39,7 @@ GameObject:
   - component: {fileID: 114813146865055712}
   - component: {fileID: 54712252050090894}
   - component: {fileID: 114742501577569282}
+  - component: {fileID: 65058883317522610}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Untagged
@@ -131,12 +131,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65233572692261002
+--- !u!65 &65058883317522610
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1798793702639406}
+  m_GameObject: {fileID: 1805085892727366}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

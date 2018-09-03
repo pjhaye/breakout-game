@@ -6,6 +6,9 @@ namespace BreakoutGame
 {
     public interface IBallHittable
     {
-        void OnHitByBall(Ball ball);
+        void OnHitByBall(
+            Ball ball, 
+            Vector3 relativeVelocity, 
+            Vector3 contactNormal);
     }
 }
