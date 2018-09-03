@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityScript.Steps;
 
 namespace BreakoutGame
 {
@@ -8,6 +9,8 @@ namespace BreakoutGame
     {
         [SerializeField]
         private MeshRenderer _baseMeshRenderer;
+
+        private BrickState _state;
 
         public void SetMaterial(Material material)
         {
@@ -30,7 +33,37 @@ namespace BreakoutGame
             Vector3 relativeVelocity, 
             Vector3 contactNormal)
         {
+            DegradeState();
+        }
 
+        private void DegradeState()
+        {
+            _state++;
+            switch(_state)
+            {
+                case BrickState.Weakened:
+                    OnWeakened();
+                    break;
+
+                case BrickState.Destroyed:
+                    OnDestroyed();
+                    break;
+            }
+        }
+
+        private void OnWeakened()
+        {
+
+        }
+
+        private void OnDestroyed()
+        {
+            Explode();
+        }
+
+        private void Explode()
+        {
+            Destroy(gameObject);
         }
     }
 }
