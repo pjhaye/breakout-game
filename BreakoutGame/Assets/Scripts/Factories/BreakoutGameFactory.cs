@@ -37,8 +37,7 @@ namespace BreakoutGame
         private BreakoutGameController InstantiateBreakoutGame(BreakoutGameConfig config, LevelConfig[] levels)
         {
             var breakoutGameObject = Instantiate(_breakoutGamePrefab);
-            var breakoutGameController = breakoutGameObject.GetComponent<BreakoutGameController>();
-            breakoutGameController.Levels = levels;
+            var breakoutGameController = breakoutGameObject.GetComponent<BreakoutGameController>();            
             breakoutGameObject.name = _breakoutGamePrefab.name;            
 
             var gameBoardConfig = config.gameBoardConfig;
@@ -50,7 +49,9 @@ namespace BreakoutGame
             breakoutGameController.BrickMeshScale = gameBoardConfig.brickMeshScale;
 
             var gameplayConfig = config.gameplayConfig;
-            breakoutGameController.LivesController.DefaultLives = gameplayConfig.numLives;            
+            breakoutGameController.LivesController.DefaultLives = gameplayConfig.numLives;
+
+            breakoutGameController.LevelController.Levels = levels;
 
             return breakoutGameController;
         }

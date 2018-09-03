@@ -25,10 +25,10 @@ namespace BreakoutGame
         private PlayerInputController _playerInputController;
         private LivesController _livesController;
         private ScoreController _scoreController;
-        private int _levelIndex = 0;
+        private LevelController _levelController;
         private Ball _ball;
         private BreakoutGameStateMachine _stateMachine;
-        private HudUi _hudUi;
+        private HudUi _hudUi;        
 
         public LivesController LivesController
         {
@@ -46,18 +46,14 @@ namespace BreakoutGame
             }
         }
 
-        public LevelConfig[] Levels
+        public LevelController LevelController
         {
             get
             {
-                return _levels;
-            }
-            set
-            {
-                _levels = value;
+                return _levelController;
             }
         }
-        
+      
         public float GameBoardWidth
         {
             get;
@@ -117,12 +113,12 @@ namespace BreakoutGame
                 return GameBoardHeight - (GameBoardHeight * VerticalPaddingPercent);
             }
         }
-
+      
         public LevelConfig CurrentLevelConfig
         {
             get
             {
-                return Levels[_levelIndex];
+                return LevelController.CurrentLevelConfig;
             }
         }
 
@@ -172,6 +168,7 @@ namespace BreakoutGame
             
             _livesController = new LivesController();
             _scoreController = new ScoreController();
+            _levelController = new LevelController();
 
             _stateMachine = new BreakoutGameStateMachine();                        
         }
