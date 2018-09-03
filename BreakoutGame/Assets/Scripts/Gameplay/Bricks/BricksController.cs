@@ -40,6 +40,7 @@ namespace BreakoutGame
             {
                 BrickDestroyed(brick);
             }
+            _bricks.Remove(brick);
         }
 
         public void ClearBricks()

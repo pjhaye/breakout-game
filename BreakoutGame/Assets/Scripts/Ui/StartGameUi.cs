@@ -23,7 +23,7 @@ namespace BreakoutGame
             (BreakoutGameController breakoutGameController)
         {
             _breakoutGameController = breakoutGameController;
-            _breakoutGameController.RestartedGame += OnRestartGame;
+            _breakoutGameController.DesiredStartGameScreen += OnRestartGame;
         }
 
         private void OnRestartGame()

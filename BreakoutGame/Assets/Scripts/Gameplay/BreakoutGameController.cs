@@ -16,10 +16,13 @@ namespace BreakoutGame
         private GameObject _hudPrefab;
         [SerializeField]
         private GameObject _startUiPrefab;
+        [SerializeField]
+        private GameObject _gameOverUiPrefab;
 
-        public event Action RestartedGame;
+        public event Action DesiredStartGameScreen;
         public event Action DesiredHudEnter;
         public event Action DesiredHudExit;
+        public event Action ReachedGameOver;
 
         private LevelConfig[] _levels;
         private BallFailDetector _ballFailDetector;
@@ -187,8 +190,10 @@ namespace BreakoutGame
             State = new GameplayState(this);
             CreateHud();
             CreateStartScreen();
+            CreateGameOverScreen();
             ResetLives();
-            GenerateLevel(CurrentLevelConfig);            
+            GenerateCurrentLevel();
+            ResetGame();
             StartIntroSequence();            
         }
 
@@ -196,23 +201,33 @@ namespace BreakoutGame
         {
             var sequence = new CommandSequence();
             sequence.AddCommand(new DelayCommand(1.0f, this));
-            sequence.AddCommand(new RestartGameCommand(this));            
+            sequence.AddCommand(new DispatchDesireStartGameCommand(this));
             sequence.Execute();
         }
 
         private void CreateStartScreen()
         {
             var startGameObject = Instantiate(_startUiPrefab);
+            startGameObject.name = _startUiPrefab.name;
             var startGameUi = startGameObject.GetComponent<StartGameUi>();
             startGameUi.AssignBreakoutGameController(this);
         }
 
-        public void RestartGame()
+        private void CreateGameOverScreen()
         {
-            if(RestartedGame != null)
-            {
-                RestartedGame();
-            }
+            var gameOverGameObject = Instantiate(_gameOverUiPrefab);
+            gameOverGameObject.name = _gameOverUiPrefab.name;
+            var gameOverUi = gameOverGameObject.GetComponent<GameOverUi>();
+            gameOverUi.AssignBreakoutGameController(this);
+        }
+
+        public void ResetGame()
+        {
+            ScoreController.ResetScore();
+            LevelController.Reset();
+            LivesController.ResetLives();
+            ClearBricks();
+            GenerateCurrentLevel();            
         }
 
         private void CreateHud()
@@ -266,6 +281,11 @@ namespace BreakoutGame
             sequence.AddCommand(new DelayCommand(1.0f, this));
             sequence.AddCommand(new LaunchBallCommand(this));
             sequence.Execute();
+        }
+
+        private void GenerateCurrentLevel()
+        {
+            GenerateLevel(CurrentLevelConfig);
         }
 
         private void GenerateLevel(LevelConfig levelConfig)
@@ -414,7 +434,8 @@ namespace BreakoutGame
         {
             var sequence = new CommandSequence();
             sequence.AddCommand(new DelayCommand(1.0f, this));
-            sequence.AddCommand(new DispatchDesireHudExitCommand(this));            
+            sequence.AddCommand(new DispatchDesireHudExitCommand(this));
+            sequence.AddCommand(new DispatchReachedGameOverCommand(this));
             sequence.Execute();
         }   
         
@@ -434,11 +455,28 @@ namespace BreakoutGame
             }
         }
 
+
+        public void DispatchDesireStartGameScreen()
+        {
+            if (DesiredStartGameScreen != null)
+            {
+                DesiredStartGameScreen();
+            }
+        }
+
+        public void DispatchReachedGameOver()
+        {
+            if (ReachedGameOver != null)
+            {
+                ReachedGameOver();
+            }
+        }
+
         public void AdvanceLevel()
         {
             LevelController.GotoNextLevel();
             ClearBricks();
-            GenerateLevel(CurrentLevelConfig);
+            GenerateCurrentLevel();
         }
 
         public void ResetLives()
@@ -449,6 +487,15 @@ namespace BreakoutGame
         public void ClearBricks()
         {
             _bricksController.ClearBricks();            
+        }
+
+        public void StartResetGameSequence()
+        {
+            var sequence = new CommandSequence();
+            sequence.AddCommand(new DelayCommand(1.0f, this));
+            sequence.AddCommand(new ResetGameCommand(this));
+            sequence.AddCommand(new StartBallLaunchSequenceCommand(this));
+            sequence.Execute();
         }
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace BreakoutGame
 {
-    public class RestartGameCommand : BreakoutGameCommand
+    public class DispatchReachedGameOverCommand : BreakoutGameCommand
     {
-        public RestartGameCommand(BreakoutGameController breakoutGameController) :
+        public DispatchReachedGameOverCommand(BreakoutGameController breakoutGameController) :
             base(breakoutGameController)
         {
 
@@ -15,7 +15,7 @@ namespace BreakoutGame
         public override void Execute()
         {
             base.Execute();
-            _breakoutGameController.RestartGame();
+            _breakoutGameController.DispatchReachedGameOver();
             OnComplete();
         }
     }

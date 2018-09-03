@@ -42,5 +42,10 @@ namespace BreakoutGame
         {
             _currentLevelIndex++;
         }
+
+        public void Reset()
+        {
+            _currentLevelIndex = 0;
+        }
     }
 }
