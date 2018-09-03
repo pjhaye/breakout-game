@@ -24,7 +24,7 @@ namespace BreakoutGame
             Vector3 relativeVelocity, 
             Vector3 contactNormal)
         {
-            Debug.Log("Wall.OnHitByBall()");
+
         }
     }
 }
