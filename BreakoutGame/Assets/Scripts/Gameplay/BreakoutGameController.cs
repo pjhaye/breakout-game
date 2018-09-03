@@ -19,10 +19,10 @@ namespace BreakoutGame
         private BrickFactory _brickFactory;
         private BallFactory _ballFactory;
         private BrickGenerator _brickGenerator;
-        private CameraRigController _cameraRig;
-        private List<Brick> _bricks = new List<Brick>();
+        private CameraRigController _cameraRig;        
         private Paddle _paddle;
         private PlayerInputController _playerInputController;
+        private BricksController _bricksController;
         private LivesController _livesController;
         private ScoreController _scoreController;
         private LevelController _levelController;
@@ -152,23 +152,7 @@ namespace BreakoutGame
             {
                 _stateMachine.State = value;
             }
-        }
-
-        public int NumBricks
-        {
-            get
-            {
-                return _bricks.Count;
-            }
-        }
-
-        public bool AreAllBricksDestroyed
-        {
-            get
-            {
-                return NumBricks <= 0;
-            }
-        }
+        }                
 
         private void Awake()
         {
@@ -180,8 +164,10 @@ namespace BreakoutGame
 
             var ballFactoryGameObject = Instantiate(_ballFactoryPrefab);
             ballFactoryGameObject.name = _ballFactoryPrefab.name;
-            _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();  
-            
+            _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();
+
+            _bricksController = new BricksController();
+            _bricksController.BrickDestroyed += OnBrickDestroy;
             _livesController = new LivesController();
             _scoreController = new ScoreController();
             _levelController = new LevelController();
@@ -256,23 +242,21 @@ namespace BreakoutGame
 
         public void AddBrick(Brick brick)
         {
-            _bricks.Add(brick);
+            _bricksController.AddBrick(brick);
             brick.SetMeshScale(BrickMeshScale);
-            brick.Destroyed += OnBrickDestroy;
             brick.transform.SetParent(transform, true);
         }
 
         private void OnBrickDestroy(Brick brick)
         {
             ScoreController.AddScore(brick.Score);
-            _bricks.Remove(brick);
 
             BeatLevelIfNoBricks();
         }
 
         private void BeatLevelIfNoBricks()
         {
-            if(!AreAllBricksDestroyed)
+            if(!_bricksController.AreAllBricksDestroyed)
             {
                 return;
             }
@@ -367,7 +351,6 @@ namespace BreakoutGame
 
         public void StartLoseLifeSequence()
         {
-            Debug.Log("StartLoseLifeSequence");
             var sequence = new CommandSequence();
             sequence.AddCommand(new DelayCommand(2.0f, this));
             sequence.AddCommand(new DestroyBallCommand(this));
@@ -407,11 +390,7 @@ namespace BreakoutGame
 
         public void ClearBricks()
         {
-            foreach(var brick in _bricks)
-            {
-                Destroy(brick.gameObject);
-            }
-            _bricks = new List<Brick>();
+            _bricksController.ClearBricks();            
         }
     }
 }
