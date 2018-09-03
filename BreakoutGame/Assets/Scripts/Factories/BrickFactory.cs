@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BreakoutGame
 {
@@ -9,7 +10,7 @@ namespace BreakoutGame
         [SerializeField]
         private GameObject _brickPrefab;
         [SerializeField]
-        private BrickColorMaterialPair[] _brickColorsToMaterials;
+        private BrickColorConfig[] _brickColorConfigs;
 
         public Brick CreateBrick(BrickConfig brickConfig)
         {
@@ -20,19 +21,32 @@ namespace BreakoutGame
             brick.SetSize(brickConfig.unitSize, brickConfig.width);            
             var material = GetMaterialFromBrickColor(brickConfig.color);
             brick.SetMaterial(material);
+            brick.Score = GetScoreFromBrickColor(brickConfig.color);
             return brick;
         }
 
         private Material GetMaterialFromBrickColor(BrickColor color)
         {
-            foreach(var brickColorMaterialPair in _brickColorsToMaterials)
+            foreach(var brickColorConfig in _brickColorConfigs)
             {
-                if(brickColorMaterialPair.color == color)
+                if(brickColorConfig.color == color)
                 {
-                    return brickColorMaterialPair.material;
+                    return brickColorConfig.material;
                 }
             }
             return null;
+        }
+
+        private int GetScoreFromBrickColor(BrickColor color)
+        {
+            foreach (var brickColorConfig in _brickColorConfigs)
+            {
+                if (brickColorConfig.color == color)
+                {
+                    return brickColorConfig.score;
+                }
+            }
+            return 0;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityScript.Steps;
+using System;
 
 namespace BreakoutGame
 {
@@ -11,6 +12,14 @@ namespace BreakoutGame
         private MeshRenderer _baseMeshRenderer;
 
         private BrickState _state;
+
+        public event Action<Brick> Destroyed;
+
+        public int Score
+        {
+            get;
+            set;
+        }
 
         public void SetMaterial(Material material)
         {
@@ -63,6 +72,10 @@ namespace BreakoutGame
 
         private void Explode()
         {
+            if(Destroyed != null)
+            {
+                Destroyed(this);
+            }
             Destroy(gameObject);
         }
     }

@@ -122,11 +122,6 @@ Prefab:
     m_Modifications:
     - target: {fileID: 224178608727423482, guid: f5dc27f8d4ffb11428f04cd0079b4053,
         type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 224178608727423482, guid: f5dc27f8d4ffb11428f04cd0079b4053,
-        type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -215,12 +210,32 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114636171847804944, guid: f5dc27f8d4ffb11428f04cd0079b4053,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114636171847804944, guid: f5dc27f8d4ffb11428f04cd0079b4053,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114110251483017772, guid: f5dc27f8d4ffb11428f04cd0079b4053,
         type: 2}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114110251483017772, guid: f5dc27f8d4ffb11428f04cd0079b4053,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114281230752086086, guid: f5dc27f8d4ffb11428f04cd0079b4053,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114281230752086086, guid: f5dc27f8d4ffb11428f04cd0079b4053,
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1

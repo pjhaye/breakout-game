@@ -53,10 +53,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _brickPrefab: {fileID: 1904543750839938, guid: ffd967dc01444704186f0373e6c4a0b0,
     type: 2}
-  _brickColorsToMaterials:
+  _brickColorConfigs:
   - color: 0
     material: {fileID: 2100000, guid: f1e3e86d4c46da5439e2b1979b3ad7a9, type: 2}
+    score: 1
   - color: 1
     material: {fileID: 2100000, guid: a08399969ffaac441b7180cf732ba221, type: 2}
+    score: 3
   - color: 2
     material: {fileID: 2100000, guid: fcc31c780b767554fb1fcfd6a71176a8, type: 2}
+    score: 5

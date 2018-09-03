@@ -17,13 +17,13 @@ MonoBehaviour:
     - chance: 1
       minColumnPercent: 0
       maxColumnPercent: 1
-      brickColors: 00000000
+      brickColors: 02000000
   - numColumns: 11
     brickSpawnRuleConfigs:
     - chance: 1
       minColumnPercent: 0
       maxColumnPercent: 1
-      brickColors: 00000000
+      brickColors: 02000000
   - numColumns: 11
     brickSpawnRuleConfigs:
     - chance: 1
@@ -41,11 +41,11 @@ MonoBehaviour:
     - chance: 1
       minColumnPercent: 0
       maxColumnPercent: 1
-      brickColors: 02000000
+      brickColors: 00000000
   - numColumns: 11
     brickSpawnRuleConfigs:
     - chance: 1
       minColumnPercent: 0
       maxColumnPercent: 1
-      brickColors: 02000000
+      brickColors: 00000000
   ballConfig: {fileID: 11400000, guid: e5655c14d64ff6c449170d1ee63b4a4d, type: 2}

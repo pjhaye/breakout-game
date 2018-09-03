@@ -8,12 +8,22 @@ namespace BreakoutGame
     {
         [SerializeField]
         private LivesUi _livesUi;
+        [SerializeField]
+        private ScoreUi _scoreUi;
 
         public LivesUi LivesUi
         {
             get
             {
                 return _livesUi;
+            }
+        }
+
+        public ScoreUi ScoreUi
+        {
+            get
+            {
+                return _scoreUi;
             }
         }
     }

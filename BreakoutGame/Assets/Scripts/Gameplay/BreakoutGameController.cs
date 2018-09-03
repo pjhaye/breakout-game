@@ -24,6 +24,7 @@ namespace BreakoutGame
         private Paddle _paddle;
         private PlayerInputController _playerInputController;
         private LivesController _livesController;
+        private ScoreController _scoreController;
         private int _levelIndex = 0;
         private Ball _ball;
         private BreakoutGameStateMachine _stateMachine;
@@ -34,6 +35,14 @@ namespace BreakoutGame
             get
             {
                 return _livesController;
+            }
+        }
+
+        public ScoreController ScoreController
+        {
+            get
+            {
+                return _scoreController;
             }
         }
 
@@ -161,6 +170,7 @@ namespace BreakoutGame
             _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();  
             
             _livesController = new LivesController();
+            _scoreController = new ScoreController();
 
             _stateMachine = new BreakoutGameStateMachine();                        
         }
@@ -180,6 +190,7 @@ namespace BreakoutGame
             hudGameObject.name = _hudPrefab.name;
             _hudUi = hudGameObject.GetComponent<HudUi>();            
             _hudUi.LivesUi.LivesController = LivesController;
+            _hudUi.ScoreUi.ScoreController = ScoreController;
         }
 
         private void Update()
@@ -232,7 +243,13 @@ namespace BreakoutGame
         {
             _bricks.Add(brick);
             brick.SetMeshScale(BrickMeshScale);
+            brick.Destroyed += OnBrickDestroy;
             brick.transform.SetParent(transform, true);
+        }
+
+        private void OnBrickDestroy(Brick brick)
+        {
+            ScoreController.AddScore(brick.Score);
         }
 
         public void AssignCameraRig(CameraRigController value)

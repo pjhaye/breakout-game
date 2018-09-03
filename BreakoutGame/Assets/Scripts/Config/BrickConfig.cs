@@ -9,5 +9,6 @@ namespace BreakoutGame
         public float width;
         public BrickColor color;
         public float unitSize = 1.0f;
+        public int score = 1;
     }
 }

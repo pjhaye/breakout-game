@@ -5,9 +5,10 @@ using UnityEngine;
 namespace BreakoutGame
 {
     [System.Serializable]
-    public class BrickColorMaterialPair
+    public class BrickColorConfig
     {
         public BrickColor color;
-        public Material material;        
+        public Material material;
+        public int score;
     }
 }

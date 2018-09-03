@@ -50,7 +50,7 @@ namespace BreakoutGame
             breakoutGameController.BrickMeshScale = gameBoardConfig.brickMeshScale;
 
             var gameplayConfig = config.gameplayConfig;
-            breakoutGameController.LivesController.DefaultLives = gameplayConfig.numLives;
+            breakoutGameController.LivesController.DefaultLives = gameplayConfig.numLives;            
 
             return breakoutGameController;
         }
