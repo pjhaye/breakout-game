@@ -339,7 +339,6 @@ namespace BreakoutGame
 
         public void GotoNextLife()
         {
-            Debug.Log(LivesController.NumLives);
             if(LivesController.IsOutOfLives)
             {
                 StartGameOverSequence();
