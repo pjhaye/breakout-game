@@ -11,6 +11,8 @@ namespace BreakoutGame
         private GameObject _brickFactoryPrefab;
         [SerializeField]
         private GameObject _ballFactoryPrefab;
+        [SerializeField]
+        private GameObject _hudPrefab;
 
         private LevelConfig[] _levels;
         private BallFailDetector _ballFailDetector;
@@ -25,6 +27,7 @@ namespace BreakoutGame
         private int _levelIndex = 0;
         private Ball _ball;
         private BreakoutGameStateMachine _stateMachine;
+        private HudUi _hudUi;
 
         public LivesController LivesController
         {
@@ -165,9 +168,18 @@ namespace BreakoutGame
         private void Start()
         {
             State = new GameplayState(this);
+            CreateHud();
             ResetLives();
             GenerateLevel(CurrentLevelConfig);
             StartBallLaunchSequence();                   
+        }
+
+        private void CreateHud()
+        {
+            var hudGameObject = Instantiate(_hudPrefab);
+            hudGameObject.name = _hudPrefab.name;
+            _hudUi = hudGameObject.GetComponent<HudUi>();            
+            _hudUi.LivesUi.LivesController = LivesController;
         }
 
         private void Update()
