@@ -276,6 +276,7 @@ namespace BreakoutGame
             var sequence = new CommandSequence();
             sequence.AddCommand(new DelayCommand(0.5f, this));
             sequence.AddCommand(new DispatchDesireHudEnterCommand(this));
+            sequence.AddCommand(new SetPlayerInputEnabledCommand(this, true));
             sequence.AddCommand(new DelayCommand(1.0f, this));
             sequence.AddCommand(new CreateBallCommand(this));
             sequence.AddCommand(new DelayCommand(1.0f, this));
@@ -342,13 +343,9 @@ namespace BreakoutGame
         public void AssignPaddle(Paddle paddle)
         {
             _paddle = paddle;
-            _paddle.transform.SetParent(transform);
-            _paddle.transform.localPosition = 
-                new Vector3(
-                    0.0f, 
-                    0.0f, 
-                    -GameBoardHeight * 0.5f * UnitSize + UnitSize * 0.5f);
+            _paddle.transform.SetParent(transform);            
             _playerInputController.Target = _paddle;
+            SetPlayerInputEnabled(false);
         }        
 
         public void CreateBall()
@@ -433,6 +430,8 @@ namespace BreakoutGame
         private void StartGameOverSequence()
         {
             var sequence = new CommandSequence();
+            sequence.AddCommand(new DelayCommand(0.5f, this));
+            sequence.AddCommand(new SetPlayerInputEnabledCommand(this, false));
             sequence.AddCommand(new DelayCommand(1.0f, this));
             sequence.AddCommand(new DispatchDesireHudExitCommand(this));
             sequence.AddCommand(new DispatchReachedGameOverCommand(this));
@@ -487,6 +486,11 @@ namespace BreakoutGame
         public void ClearBricks()
         {
             _bricksController.ClearBricks();            
+        }
+
+        public void SetPlayerInputEnabled(bool value)
+        {
+            _playerInputController.enabled = value;
         }
 
         public void StartResetGameSequence()
