@@ -130,10 +130,11 @@ namespace BreakoutGame
         {
             get
             {
+                var startOffsetY = CurrentLevelConfig.ballConfig.startOffsetY;
                 return new Vector3(
                     0.0f,
                     0.0f,
-                    -(PaddedGameBoardHeight * 0.5f) + CurrentLevelConfig.ballConfig.startOffsetY);
+                    -(PaddedGameBoardHeight * 0.5f) + startOffsetY);
             }
         }     
         
@@ -274,9 +275,13 @@ namespace BreakoutGame
         {
             var ballConfig = CurrentLevelConfig.ballConfig;
             _ball = _ballFactory.CreateBall(ballConfig);
-            var startPosition = BallStartPosition;
-            var leftMost = -GameBoardWidth * 0.5f + ballConfig.minBallSpawnXPercent * GameBoardWidth;
-            var rightMost = -GameBoardWidth * 0.5f + ballConfig.maxBallSpawnXPercent * GameBoardWidth;
+            var startPosition = BallStartPosition;            
+
+            var minWidthPercent = ballConfig.minBallSpawnXPercent * GameBoardWidth;
+            var maxWidthPercent = ballConfig.minBallSpawnXPercent * GameBoardWidth;
+
+            var leftMost = -GameBoardWidth * 0.5f + minWidthPercent;
+            var rightMost = -GameBoardWidth * 0.5f + maxWidthPercent;
             var startX = Random.Range(leftMost, rightMost);
             startPosition.x = startX;
             _ball.transform.position = startPosition * UnitSize;
