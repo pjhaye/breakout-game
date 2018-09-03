@@ -111,7 +111,15 @@ namespace BreakoutGame
                     0.0f,
                     -(PaddedGameBoardHeight * 0.5f) + CurrentLevelConfig.ballConfig.startOffsetY);
             }
-        }                
+        }     
+        
+        public float BallFailY
+        {
+            get
+            {
+                return -GameBoardHeight * 0.5f;
+            }
+        }
 
         private void Awake()
         {
@@ -130,6 +138,28 @@ namespace BreakoutGame
         {
             GenerateLevel(CurrentLevelConfig);
             StartBallLaunchSequence();
+        }
+
+        private void FixedUpdate()
+        {
+            CheckForBallFail();
+        }
+
+        private void CheckForBallFail()
+        {
+            if (_ball != null)
+            {
+                var ballY = _ball.transform.localPosition.z;
+                if (ballY <= BallFailY * UnitSize)
+                {
+                    OnBallFail();
+                }
+            }
+        }
+
+        private void OnBallFail()
+        {
+
         }
 
         public void StartBallLaunchSequence()
