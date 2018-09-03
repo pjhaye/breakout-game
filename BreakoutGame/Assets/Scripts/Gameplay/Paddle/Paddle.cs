@@ -72,6 +72,18 @@ namespace BreakoutGame
             }
         }
 
+        public float MinReflectionAngle
+        {
+            get;
+            set;
+        }
+
+        public float MaxReflectionAngle
+        {
+            get;
+            set;
+        }
+
         private void Awake()
         {
             _paddleMovement = GetComponent<PaddleMovement>();
@@ -143,7 +155,27 @@ namespace BreakoutGame
 
             var angleChange = Random.Range(-_maxBallAngleChange, _maxBallAngleChange);
             var rotation = Quaternion.Euler(0.0f, angleChange, 0.0f);
-            reflectedVelocity = rotation * reflectedVelocity;            
+            reflectedVelocity = rotation * reflectedVelocity;
+            
+            var reflectionAngle = Vector3.forward.SignedHeadingAngleTo(reflectedVelocity);
+            
+            var speed = reflectedVelocity.magnitude;
+
+            var bouncedFromFront = contactNormal.z > 0.0f;
+            if (bouncedFromFront)
+            {
+                if (reflectionAngle < MinReflectionAngle)
+                {
+                    var minRotation = Quaternion.Euler(0.0f, MinReflectionAngle, 0.0f);
+                    reflectedVelocity = minRotation * Vector3.forward * speed;
+                }
+                else if (reflectionAngle > MaxReflectionAngle)
+                {
+                    var maxRotation = Quaternion.Euler(0.0f, MaxReflectionAngle, 0.0f);
+                    reflectedVelocity = maxRotation * Vector3.forward * speed;
+                }
+            }
+
             ball.Velocity = reflectedVelocity;            
         }
     }

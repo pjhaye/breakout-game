@@ -16,3 +16,5 @@ MonoBehaviour:
   acceleration: 100
   decceleration: 150
   maxBallAngleChange: 25
+  minReflectionAngle: -45
+  maxReflectionAngle: 45
