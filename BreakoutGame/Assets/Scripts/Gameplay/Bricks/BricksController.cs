@@ -36,11 +36,11 @@ namespace BreakoutGame
         
         private void OnBrickDestroy(Brick brick)
         {
-            if(BrickDestroyed != null)
+            _bricks.Remove(brick);
+            if (BrickDestroyed != null)
             {
                 BrickDestroyed(brick);
-            }
-            _bricks.Remove(brick);
+            }            
         }
 
         public void ClearBricks()
