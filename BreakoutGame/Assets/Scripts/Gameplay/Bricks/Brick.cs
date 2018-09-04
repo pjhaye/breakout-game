@@ -9,7 +9,9 @@ namespace BreakoutGame
     public class Brick : MonoBehaviour, IBallHittable
     {
         [SerializeField]
-        private MeshRenderer _baseMeshRenderer;
+        private MeshRenderer _untouchedMeshRenderer;
+        [SerializeField]
+        private MeshRenderer _weakenedMeshRenderer;
 
         private BrickState _state;
 
@@ -28,9 +30,16 @@ namespace BreakoutGame
             set;
         }
 
-        public void SetMaterial(Material material)
+        private void Start()
         {
-            _baseMeshRenderer.material = material;
+            _untouchedMeshRenderer.gameObject.SetActive(true);
+            _weakenedMeshRenderer.gameObject.SetActive(false);
+        }
+
+        public void SetMaterial(Material material, Material weakenedMaterial)
+        {
+            _untouchedMeshRenderer.material = material;
+            _weakenedMeshRenderer.material = weakenedMaterial;
         }
 
         public void SetSize(float unitSize, float width)
@@ -40,8 +49,11 @@ namespace BreakoutGame
 
         public void SetMeshScale(float scale)
         {
-            var meshTransform = _baseMeshRenderer.gameObject.transform;
-            meshTransform.localScale = new Vector3(scale, scale, scale);
+            var untouchedTransform = _untouchedMeshRenderer.gameObject.transform;
+            untouchedTransform.localScale = new Vector3(scale, scale, scale);
+
+            var weakenedTransform = _weakenedMeshRenderer.gameObject.transform;
+            weakenedTransform.localScale = new Vector3(scale, scale, scale);
         }
 
         public void OnHitByBall(
@@ -73,7 +85,8 @@ namespace BreakoutGame
 
         private void OnWeakened()
         {
-            
+            _untouchedMeshRenderer.gameObject.SetActive(false);
+            _weakenedMeshRenderer.gameObject.SetActive(true);
         }
 
         private void OnDestroyed()

@@ -56,10 +56,13 @@ MonoBehaviour:
   _brickColorConfigs:
   - color: 0
     material: {fileID: 2100000, guid: f1e3e86d4c46da5439e2b1979b3ad7a9, type: 2}
+    weakenedMaterial: {fileID: 2100000, guid: 64da5389f281c1942b9ec6353864a87e, type: 2}
     score: 1
   - color: 1
     material: {fileID: 2100000, guid: a08399969ffaac441b7180cf732ba221, type: 2}
+    weakenedMaterial: {fileID: 2100000, guid: 5d357c310de7a20479dbdcced1d0540f, type: 2}
     score: 3
   - color: 2
     material: {fileID: 2100000, guid: fcc31c780b767554fb1fcfd6a71176a8, type: 2}
+    weakenedMaterial: {fileID: 2100000, guid: 90fa9bd058bb06c4bba8672b69a3ed9a, type: 2}
     score: 5

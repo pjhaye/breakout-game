@@ -20,7 +20,8 @@ namespace BreakoutGame
             var brick = brickGameObject.GetComponent<Brick>();
             brick.SetSize(brickConfig.unitSize, brickConfig.width);            
             var material = GetMaterialFromBrickColor(brickConfig.color);
-            brick.SetMaterial(material);
+            var weakenedMaterial = GetWeakenedMaterialFromBrickColor(brickConfig.color);
+            brick.SetMaterial(material, weakenedMaterial);
             brick.Score = GetScoreFromBrickColor(brickConfig.color);
             brick.Color = brickConfig.color;
             return brick;
@@ -33,6 +34,18 @@ namespace BreakoutGame
                 if(brickColorConfig.color == color)
                 {
                     return brickColorConfig.material;
+                }
+            }
+            return null;
+        }
+
+        private Material GetWeakenedMaterialFromBrickColor(BrickColor color)
+        {
+            foreach (var brickColorConfig in _brickColorConfigs)
+            {
+                if (brickColorConfig.color == color)
+                {
+                    return brickColorConfig.weakenedMaterial;
                 }
             }
             return null;

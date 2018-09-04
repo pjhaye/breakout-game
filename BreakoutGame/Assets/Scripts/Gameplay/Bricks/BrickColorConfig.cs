@@ -9,6 +9,7 @@ namespace BreakoutGame
     {
         public BrickColor color;
         public Material material;
+        public Material weakenedMaterial;
         public int score;
     }
 }
