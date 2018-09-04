@@ -34,6 +34,14 @@ namespace BreakoutGame
             }
         }
 
+        public Camera Camera
+        {
+            get
+            {
+                return _camera;
+            }
+        }
+
         void Awake()
         {
             _camera = GetComponentInChildren<Camera>();

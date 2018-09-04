@@ -64,7 +64,8 @@ namespace BreakoutGame
             cameraRigGameObject.name = _cameraRigPrefab.name;
             var cameraRig = cameraRigGameObject.GetComponent<CameraRigController>();
             cameraRig.BaseCameraPosition = cameraConfig.baseCameraPosition;
-            cameraRig.BaseCameraRotation = cameraConfig.baseCameraRotation;     
+            cameraRig.BaseCameraRotation = cameraConfig.baseCameraRotation;
+            cameraRig.Camera.fieldOfView = cameraConfig.baseCameraFov;
             
             breakoutGameController.AssignCameraRig(cameraRig);
         }

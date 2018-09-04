@@ -9,5 +9,6 @@ namespace BreakoutGame
     {
         public Vector3 baseCameraPosition;
         public Vector3 baseCameraRotation;
+        public float baseCameraFov;
     }
 }
