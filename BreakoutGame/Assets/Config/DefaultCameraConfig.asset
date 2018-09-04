@@ -13,3 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCameraPosition: {x: 0, y: 11.5, z: -4.1}
   baseCameraRotation: {x: 70, y: 0, z: 0}
+  baseCameraFov: 55
