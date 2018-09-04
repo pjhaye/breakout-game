@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -132,7 +133,14 @@ namespace BreakoutGame
             Ball ball, 
             Vector3 relativeVelocity,
             Vector3 contactNormal)
-        {
+        {            
+            var isSideHit = Mathf.Abs(contactNormal.x) > float.Epsilon;
+            if(isSideHit)
+            {
+                ball.Velocity = new Vector3(ball.Velocity.x * -1, ball.Velocity.y, ball.Velocity.z);
+                return;
+            }
+
             var isForwardHit = contactNormal.z > 0.5f;
             if (!isForwardHit)
             {
@@ -146,7 +154,8 @@ namespace BreakoutGame
             var reflectionAngle = Mathf.Clamp(desiredReflectionAngle, -MaxBallReflectionAngle, MaxBallReflectionAngle);
             var direction = Quaternion.Euler(0.0f, reflectionAngle, 0.0f) * Vector3.forward;
             var currentBallSpeed = ball.Velocity.magnitude;
-            ball.Velocity = direction * currentBallSpeed;            
+            ball.Velocity = direction * currentBallSpeed;    
+            Debug.Log("Reflected");
         }
     }
 }
