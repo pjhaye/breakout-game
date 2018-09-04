@@ -8,6 +8,8 @@ namespace BreakoutGame
 {
     public class Brick : MonoBehaviour, IBallHittable
     {
+        private const float HitCooldownDuration = 0.2f;
+
         [SerializeField]
         private MeshRenderer _untouchedMeshRenderer;
         [SerializeField]
@@ -16,9 +18,10 @@ namespace BreakoutGame
         private GameObject _brickGhostPrefab;            
 
         private BrickState _state;
+        private float _hitCooldownTimeLeft = 0.0f;
 
         public event Action<Brick> Hit;
-        public event Action<Brick> Destroyed;
+        public event Action<Brick> Destroyed;        
 
         public int Score
         {
@@ -30,6 +33,14 @@ namespace BreakoutGame
         {
             get;
             set;
+        }
+
+        private bool IsHitCooldownActive
+        {
+            get
+            {
+                return _hitCooldownTimeLeft > 0.0f;
+            }
         }
 
         private void Start()
@@ -63,12 +74,23 @@ namespace BreakoutGame
             Vector3 relativeVelocity, 
             Vector3 contactNormal)
         {
+            if(IsHitCooldownActive)
+            {
+                return;
+            }
+
             if (Hit != null)
             {
                 Hit(this);
             }
             CreateGhost();
             DegradeState();
+            StartHitCooldown();
+        }
+
+        private void StartHitCooldown()
+        {
+            _hitCooldownTimeLeft = HitCooldownDuration;
         }
 
         private void DegradeState()
@@ -104,6 +126,18 @@ namespace BreakoutGame
             ghost.transform.position = transform.position;
             ghost.transform.localScale = transform.localScale;
             ghost.transform.localRotation = transform.localRotation;
+        }
+
+        private void FixedUpdate()
+        {
+            if (_hitCooldownTimeLeft > 0.0f)
+            {
+                _hitCooldownTimeLeft -= Time.deltaTime;
+                if(_hitCooldownTimeLeft <= 0.0f)
+                {
+                    _hitCooldownTimeLeft = 0.0f;
+                }
+            }
         }
 
         private void Explode()
