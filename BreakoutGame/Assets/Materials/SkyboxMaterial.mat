@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PaddleCenter
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Name: SkyboxMaterial
+  m_Shader: {fileID: 4800000, guid: e9829978fd111864b9e0e80c87751417, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -80,6 +80,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.4339623, g: 0.24022911, b: 0, a: 1}
+    - Color_E2BC1F39: {r: 0.028301895, g: 0.028301895, b: 0.028301895, a: 0}
+    - Color_F77F2813: {r: 0.01776744, g: 0.009567461, b: 0.047169805, a: 0}
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
