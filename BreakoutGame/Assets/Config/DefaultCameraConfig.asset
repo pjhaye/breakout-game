@@ -11,6 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56937a893fe3f5b4aaa5902a6cce5ebd, type: 3}
   m_Name: DefaultCameraConfig
   m_EditorClassIdentifier: 
-  baseCameraPosition: {x: 0, y: 11.5, z: -4.1}
+  baseCameraPosition: {x: 0, y: 11.5, z: -4.35}
   baseCameraRotation: {x: 70, y: 0, z: 0}
   baseCameraFov: 55
+  movementSmoothTime: 0.5
+  lookRotationSpeed: 1
+  paddleFollowCoefficient: 0.15
+  ballLookCoefficient: 0.05

@@ -66,6 +66,9 @@ namespace BreakoutGame
             cameraRig.BaseCameraPosition = cameraConfig.baseCameraPosition;
             cameraRig.BaseCameraRotation = cameraConfig.baseCameraRotation;
             cameraRig.Camera.fieldOfView = cameraConfig.baseCameraFov;
+            cameraRig.MovementSmoothTime = cameraConfig.movementSmoothTime;
+            cameraRig.PaddleFollowCoefficient = cameraConfig.paddleFollowCoefficient;
+            cameraRig.BallFollowCoefficient = cameraConfig.ballLookCoefficient;
             
             breakoutGameController.AssignCameraRig(cameraRig);
         }

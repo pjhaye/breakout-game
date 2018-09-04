@@ -390,6 +390,7 @@ namespace BreakoutGame
             _playerInputController.Target = _paddle;
             SetPlayerInputEnabled(false);
             ResetPaddlePosition();
+            _cameraRig.PaddleTransform = _paddle.transform;
         }        
 
         public void CreateBall()
@@ -411,6 +412,8 @@ namespace BreakoutGame
                 this,
                 _ball,
                 BallFailY * UnitSize);
+
+            _cameraRig.BallTransform = _ball.transform;
         }
 
         public void LaunchBall()
