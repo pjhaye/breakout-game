@@ -240,3 +240,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _untouchedMeshRenderer: {fileID: 23228138320414510}
   _weakenedMeshRenderer: {fileID: 23348108479332034}
+  _brickGhostPrefab: {fileID: 1815588362150632, guid: 87624578cdec038469cd8e4d0f7287da,
+    type: 2}

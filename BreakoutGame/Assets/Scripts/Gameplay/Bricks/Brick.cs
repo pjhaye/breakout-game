@@ -12,6 +12,8 @@ namespace BreakoutGame
         private MeshRenderer _untouchedMeshRenderer;
         [SerializeField]
         private MeshRenderer _weakenedMeshRenderer;
+        [SerializeField]
+        private GameObject _brickGhostPrefab;            
 
         private BrickState _state;
 
@@ -65,6 +67,7 @@ namespace BreakoutGame
             {
                 Hit(this);
             }
+            CreateGhost();
             DegradeState();
         }
 
@@ -93,6 +96,14 @@ namespace BreakoutGame
         {
             Explode();
             
+        }
+
+        private void CreateGhost()
+        {
+            var ghost = Instantiate(_brickGhostPrefab);
+            ghost.transform.position = transform.position;
+            ghost.transform.localScale = transform.localScale;
+            ghost.transform.localRotation = transform.localRotation;
         }
 
         private void Explode()
