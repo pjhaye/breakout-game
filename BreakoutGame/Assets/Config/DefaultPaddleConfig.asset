@@ -11,10 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957fdfc4efa494f4baf42e142febf710, type: 3}
   m_Name: DefaultPaddleConfig
   m_EditorClassIdentifier: 
-  paddleWidth: 4
+  paddleWidth: 5
   maximumSpeed: 13
   acceleration: 100
   decceleration: 150
-  maxBallAngleChange: 25
-  minReflectionAngle: -45
-  maxReflectionAngle: 45
+  maxBallReflectionAngle: 45
