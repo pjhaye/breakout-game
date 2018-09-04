@@ -22,6 +22,7 @@ namespace BreakoutGame
             var material = GetMaterialFromBrickColor(brickConfig.color);
             brick.SetMaterial(material);
             brick.Score = GetScoreFromBrickColor(brickConfig.color);
+            brick.Color = brickConfig.color;
             return brick;
         }
 

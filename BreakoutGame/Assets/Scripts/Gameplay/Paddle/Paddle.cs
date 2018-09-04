@@ -146,7 +146,7 @@ namespace BreakoutGame
             var reflectionAngle = Mathf.Clamp(desiredReflectionAngle, -MaxBallReflectionAngle, MaxBallReflectionAngle);
             var direction = Quaternion.Euler(0.0f, reflectionAngle, 0.0f) * Vector3.forward;
             var currentBallSpeed = ball.Velocity.magnitude;
-            ball.Velocity = direction * currentBallSpeed;
+            ball.Velocity = direction * currentBallSpeed;            
         }
     }
 }

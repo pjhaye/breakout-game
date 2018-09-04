@@ -13,9 +13,16 @@ namespace BreakoutGame
 
         private BrickState _state;
 
+        public event Action<Brick> Hit;
         public event Action<Brick> Destroyed;
 
         public int Score
+        {
+            get;
+            set;
+        }
+
+        public BrickColor Color
         {
             get;
             set;
@@ -42,6 +49,10 @@ namespace BreakoutGame
             Vector3 relativeVelocity, 
             Vector3 contactNormal)
         {
+            if (Hit != null)
+            {
+                Hit(this);
+            }
             DegradeState();
         }
 
@@ -62,12 +73,13 @@ namespace BreakoutGame
 
         private void OnWeakened()
         {
-
+            
         }
 
         private void OnDestroyed()
         {
             Explode();
+            
         }
 
         private void Explode()

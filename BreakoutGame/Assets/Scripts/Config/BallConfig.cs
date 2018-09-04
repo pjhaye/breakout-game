@@ -13,6 +13,7 @@ namespace BreakoutGame
         public float maxLaunchAngle = 45.0f;
         public float minBallSpawnXPercent = 0.1f;
         public float maxBallSpawnXPercent = 0.9f;
-        public float ballLaunchSpeed = 10.0f;
+        public float ballLaunchSpeed = 6.5f;
+        public float additionalSpeedPerBrickColorHit = 3.5f;
     }
 }

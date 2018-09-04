@@ -103,6 +103,19 @@ namespace BreakoutGame
             set;
         }
 
+        public float DesiredBallSpeed
+        {
+            get
+            {
+                var ballConfig = CurrentLevelConfig.ballConfig;
+
+                var baseSpeed = ballConfig.ballLaunchSpeed;
+                var additionalSpeed = _bricksController.NumBrickColorsHit * 
+                                      ballConfig.additionalSpeedPerBrickColorHit;
+                return baseSpeed + additionalSpeed;
+            }
+        }
+
         public Ball Ball
         {
             get
@@ -180,6 +193,7 @@ namespace BreakoutGame
             _ballFactory = ballFactoryGameObject.GetComponent<BallFactory>();
 
             _bricksController = new BricksController();
+            _bricksController.BrickHit += OnBrickHit;
             _bricksController.BrickDestroyed += OnBrickDestroy;
             _livesController = new LivesController();
             _scoreController = new ScoreController();
@@ -329,6 +343,11 @@ namespace BreakoutGame
             brick.transform.SetParent(transform, true);
         }
 
+        private void OnBrickHit(Brick brick)
+        {
+            Ball.Speed = DesiredBallSpeed;
+        }
+
         private void OnBrickDestroy(Brick brick)
         {
             ScoreController.AddScore(brick.Score);
@@ -400,7 +419,7 @@ namespace BreakoutGame
             var angle = UnityEngine.Random.Range(
                 ballConfig.minLaunchAngle,
                 ballConfig.maxLaunchAngle);
-            LaunchBallAtAngle(angle, ballConfig.ballLaunchSpeed);
+            LaunchBallAtAngle(angle, DesiredBallSpeed);
         }
 
         public void DestroyBall()
