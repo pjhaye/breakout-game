@@ -11,8 +11,6 @@ namespace BreakoutGame
         public float maximumSpeed = 8.0f;
         public float acceleration = 50.0f;
         public float decceleration = 100.0f;
-        public float maxBallAngleChange = 15.0f;
-        public float minReflectionAngle = -35.0f;
-        public float maxReflectionAngle = 35.0f;
+        public float maxBallReflectionAngle = 45.0f;        
     }
 }

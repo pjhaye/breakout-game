@@ -14,7 +14,7 @@ namespace BreakoutGame
         private float _unitSize = 1.0f;
         private float _width = 2.0f;
         private Rigidbody _rigidbody;
-        private float _maxBallAngleChange = 15.0f;
+        private float _maxBallReflectionAngle = 15.0f;
 
         public PaddleMovement PaddleMovement
         {
@@ -60,28 +60,16 @@ namespace BreakoutGame
             }
         }
 
-        public float MaxBallAngleChange
+        public float MaxBallReflectionAngle
         {
             get
             {
-                return _maxBallAngleChange;
+                return _maxBallReflectionAngle;
             }
             set
             {
-                _maxBallAngleChange = value;
+                _maxBallReflectionAngle = value;
             }
-        }
-
-        public float MinReflectionAngle
-        {
-            get;
-            set;
-        }
-
-        public float MaxReflectionAngle
-        {
-            get;
-            set;
         }
 
         private void Awake()
@@ -145,38 +133,20 @@ namespace BreakoutGame
             Vector3 relativeVelocity,
             Vector3 contactNormal)
         {
-            var dot = Vector3.Dot(ball.Velocity.normalized, contactNormal);
-            if (dot > 0.0f)
+            var isForwardHit = contactNormal.z > 0.5f;
+            if (!isForwardHit)
             {
                 return;
             }
-            var reflectedVelocity = Vector3.Reflect(ball.Velocity, contactNormal);
-            ball.Velocity = reflectedVelocity;
 
-            var angleChange = Random.Range(-_maxBallAngleChange, _maxBallAngleChange);
-            var rotation = Quaternion.Euler(0.0f, angleChange, 0.0f);
-            reflectedVelocity = rotation * reflectedVelocity;
-            
-            var reflectionAngle = Vector3.forward.SignedHeadingAngleTo(reflectedVelocity);
-            
-            var speed = reflectedVelocity.magnitude;
-
-            var bouncedFromFront = contactNormal.z > 0.0f;
-            if (bouncedFromFront)
-            {
-                if (reflectionAngle < MinReflectionAngle)
-                {
-                    var minRotation = Quaternion.Euler(0.0f, MinReflectionAngle, 0.0f);
-                    reflectedVelocity = minRotation * Vector3.forward * speed;
-                }
-                else if (reflectionAngle > MaxReflectionAngle)
-                {
-                    var maxRotation = Quaternion.Euler(0.0f, MaxReflectionAngle, 0.0f);
-                    reflectedVelocity = maxRotation * Vector3.forward * speed;
-                }
-            }
-
-            ball.Velocity = reflectedVelocity;            
+            var xDifference = ball.transform.localPosition.x - transform.localPosition.x;
+            var widthHalf = (Width * 0.5f) * UnitSize;
+            var normalizedXDifference = xDifference / widthHalf;
+            var desiredReflectionAngle = MaxBallReflectionAngle * normalizedXDifference;
+            var reflectionAngle = Mathf.Clamp(desiredReflectionAngle, -MaxBallReflectionAngle, MaxBallReflectionAngle);
+            var direction = Quaternion.Euler(0.0f, reflectionAngle, 0.0f) * Vector3.forward;
+            var currentBallSpeed = ball.Velocity.magnitude;
+            ball.Velocity = direction * currentBallSpeed;
         }
     }
 }

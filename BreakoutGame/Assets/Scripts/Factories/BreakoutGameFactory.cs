@@ -179,9 +179,7 @@ namespace BreakoutGame
             paddle.SetMaximumSpeed(paddleConfig.maximumSpeed);
             paddle.SetAcceleration(paddleConfig.acceleration);
             paddle.SetDecceleration(paddleConfig.decceleration);
-            paddle.MaxBallAngleChange = paddleConfig.maxBallAngleChange;
-            paddle.MinReflectionAngle = paddleConfig.minReflectionAngle;
-            paddle.MaxReflectionAngle = paddleConfig.maxReflectionAngle;
+            paddle.MaxBallReflectionAngle = paddleConfig.maxBallReflectionAngle;            
 
             breakoutGameController.AssignPaddle(paddle);
         }
