@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1519134301786918}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7894936, y: 1.0212593, z: 1.4315186}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4055777294187202}
@@ -227,6 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b94a5dec3963346ac68f4cc5aff601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _impactParticlePrefab: {fileID: 1251469257674040, guid: 53d1fd5628478e544946cbb108efce3b,
+    type: 2}
 --- !u!135 &135592324005156210
 SphereCollider:
   m_ObjectHideFlags: 1

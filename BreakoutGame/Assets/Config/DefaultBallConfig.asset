@@ -17,5 +17,5 @@ MonoBehaviour:
   maxLaunchAngle: 45
   minBallSpawnXPercent: 0.1
   maxBallSpawnXPercent: 0.9
-  ballLaunchSpeed: 6.5
-  additionalSpeedPerBrickColorHit: 1.75
+  ballLaunchSpeed: 4
+  additionalSpeedPerBrickColorHit: 1

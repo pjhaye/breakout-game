@@ -7,6 +7,9 @@ namespace BreakoutGame
 {
     public class Ball : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject _impactParticlePrefab;
+
         private Rigidbody _rigidbody;
         private Vector3 _velocity;
 
@@ -67,7 +70,18 @@ namespace BreakoutGame
                     this, 
                     other.relativeVelocity, 
                     other.contacts[0].normal);
+
+                CreateImpactParticle(
+                    other.contacts[0].point, 
+                    Quaternion.LookRotation(other.contacts[0].normal).eulerAngles);
             }                        
+        }
+
+        private void CreateImpactParticle(Vector3 position, Vector3 rotation)
+        {
+            var impactParticleGameObject = Instantiate(_impactParticlePrefab);
+            impactParticleGameObject.transform.position = position;
+            impactParticleGameObject.transform.rotation = Quaternion.Euler(rotation);
         }
     }
 }
