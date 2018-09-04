@@ -18,11 +18,14 @@ namespace BreakoutGame
         private GameObject _startUiPrefab;
         [SerializeField]
         private GameObject _gameOverUiPrefab;
+        [SerializeField]
+        private GameObject _nextLevelPopupPrefab;
 
         public event Action DesiredStartGameScreen;
         public event Action DesiredHudEnter;
         public event Action DesiredHudExit;
         public event Action ReachedGameOver;
+        public event Action BeatCurrentLevel;
 
         private LevelConfig[] _levels;
         private BallFailDetector _ballFailDetector;
@@ -191,6 +194,7 @@ namespace BreakoutGame
             CreateHud();
             CreateStartScreen();
             CreateGameOverScreen();
+            CreateNextLevelPopup();
             ResetLives();
             GenerateCurrentLevel();
             ResetGame();
@@ -219,6 +223,14 @@ namespace BreakoutGame
             gameOverGameObject.name = _gameOverUiPrefab.name;
             var gameOverUi = gameOverGameObject.GetComponent<GameOverUi>();
             gameOverUi.AssignBreakoutGameController(this);
+        }
+
+        private void CreateNextLevelPopup()
+        {
+            var nextLevelPopupGameObject = Instantiate(_nextLevelPopupPrefab);
+            nextLevelPopupGameObject.name = _nextLevelPopupPrefab.name;
+            var nextLevelPopupUi = nextLevelPopupGameObject.GetComponent<NextLevelPopupUi>();
+            nextLevelPopupUi.AssignBreakoutGameController(this);
         }
 
         public void ResetGame()
@@ -326,10 +338,10 @@ namespace BreakoutGame
 
         private void BeatLevelIfNoBricks()
         {
-            if(!_bricksController.AreAllBricksDestroyed)
+            if (!_bricksController.AreAllBricksDestroyed)
             {
                 return;
-            }
+            }            
 
             StartLevelCompleteSequence();
         }
@@ -337,8 +349,10 @@ namespace BreakoutGame
         private void StartLevelCompleteSequence()
         {
             var sequence = new CommandSequence();
-            sequence.AddCommand(new DestroyBallCommand(this));
-            sequence.AddCommand(new DelayCommand(2.0f, this));
+            sequence.AddCommand(new DestroyBallCommand(this));            
+            sequence.AddCommand(new DelayCommand(0.5f, this));
+            sequence.AddCommand(new DispatchBeatCurrentLevelCommand(this));            
+            sequence.AddCommand(new DelayCommand(3.0f, this));
             sequence.AddCommand(new AdvanceLevelCommand(this));
             sequence.AddCommand(new StartBallLaunchSequenceCommand(this));
             sequence.Execute();
@@ -482,11 +496,19 @@ namespace BreakoutGame
             }
         }
 
+        public void DispatchBeatCurrentLevel()
+        {
+            if (BeatCurrentLevel != null)
+            {
+                BeatCurrentLevel();
+            }
+        }
+
         public void AdvanceLevel()
         {
             LevelController.GotoNextLevel();
             ClearBricks();
-            GenerateCurrentLevel();
+            GenerateCurrentLevel();            
         }
 
         public void ResetLives()

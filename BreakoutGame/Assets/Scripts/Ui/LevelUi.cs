@@ -9,6 +9,8 @@ namespace BreakoutGame
     {
         [SerializeField]
         private TextMeshProUGUI _textField;
+        [SerializeField]
+        private bool _withLevelPrefix = false;
 
         public LevelController LevelController
         {
@@ -32,7 +34,15 @@ namespace BreakoutGame
             {
                 return;
             }
-            _textField.text = LevelController.LevelNumber.ToString();
+
+            if (!_withLevelPrefix)
+            {
+                _textField.text = LevelController.LevelNumber.ToString();
+            }
+            else
+            {
+                _textField.text = "Level: " + LevelController.LevelNumber;
+            }
         }
     }
 }

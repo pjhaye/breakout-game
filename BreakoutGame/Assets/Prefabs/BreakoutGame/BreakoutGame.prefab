@@ -61,6 +61,8 @@ MonoBehaviour:
     type: 2}
   _gameOverUiPrefab: {fileID: 1917771260326344, guid: b2fba9d359ca55c4b8eeec927c31ca96,
     type: 2}
+  _nextLevelPopupPrefab: {fileID: 1481936057730872, guid: 72a7099cb0380af43959404594442544,
+    type: 2}
 --- !u!114 &114964342401847638
 MonoBehaviour:
   m_ObjectHideFlags: 1

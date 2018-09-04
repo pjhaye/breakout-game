@@ -11,6 +11,7 @@ namespace BreakoutGame
     {       
         public virtual void ShowUi()
         {
+            enabled = true;
             var children = GetComponentsInChildren<AnimatedUi>(true);
             foreach(var child in children)
             {
@@ -19,11 +20,12 @@ namespace BreakoutGame
                     continue;
                 }
                 child.ShowUi();
-            }
+            }            
         }
 
         public virtual void ShowUiInstant()
         {
+            enabled = true;
             var children = GetComponentsInChildren<AnimatedUi>(true);
             foreach (var child in children)
             {
