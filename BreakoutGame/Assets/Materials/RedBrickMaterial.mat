@@ -262,7 +262,7 @@ Material:
     - _ZTestModeDistortion: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_32C83873: {r: 1, g: 0.018271629, b: 0, a: 0}
+    - Color_32C83873: {r: 0.6320754, g: 0.012393637, b: 0, a: 0}
     - Color_E8EF7F25: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
     - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 0, b: 0, a: 1}
