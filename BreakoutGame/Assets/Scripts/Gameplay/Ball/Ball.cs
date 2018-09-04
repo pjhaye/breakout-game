@@ -7,7 +7,6 @@ namespace BreakoutGame
 {
     public class Ball : MonoBehaviour
     {
-        private const float VelocityEpsilon = 0.01f;
         private Rigidbody _rigidbody;
         private Vector3 _velocity;
 
@@ -31,7 +30,7 @@ namespace BreakoutGame
             }
             set
             {
-                if(Math.Abs(Velocity.magnitude) < VelocityEpsilon)
+                if(Math.Abs(Velocity.magnitude) < float.Epsilon)
                 {
                     Velocity = Vector3.forward;
                 }

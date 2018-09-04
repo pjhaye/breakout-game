@@ -6,8 +6,6 @@ namespace BreakoutGame
 {
     public class PaddleMovement : MonoBehaviour
     {
-        private const float Epsilon = 0.005f;
-
         [SerializeField]
         private float _maximumSpeed = 1.0f;
         [SerializeField]
@@ -96,7 +94,7 @@ namespace BreakoutGame
 
         public void AccelerateInDirection(Vector3 direction, float deltaTime)
         {
-            if(direction.magnitude <= Epsilon)
+            if(direction.magnitude <= float.Epsilon)
             {
                 return;
             }
@@ -120,14 +118,14 @@ namespace BreakoutGame
         {
             var speed = _velocity.magnitude;
 
-            if (speed <= Epsilon)
+            if (speed <= float.Epsilon)
             {
                 speed = 0.0f;
             }
             else
             {
                 speed -= Decceleration * deltaTime;
-                if (speed <= Epsilon)
+                if (speed <= float.Epsilon)
                 {
                     speed = 0.0f;
                 }

@@ -7,8 +7,6 @@ namespace BreakoutGame
 {
     public class BallReflectingSurface : MonoBehaviour, IBallHittable
     {
-        private const float Epsilon = 0.1f;
-
         public void OnHitByBall(Ball ball, Vector3 relativeVelocity, Vector3 contactNormal)
         {
             ReflectBall(ball, relativeVelocity, contactNormal);
