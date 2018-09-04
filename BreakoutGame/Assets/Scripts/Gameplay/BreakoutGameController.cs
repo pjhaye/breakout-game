@@ -399,7 +399,7 @@ namespace BreakoutGame
             var startPosition = BallStartPosition;            
 
             var minWidthPercent = ballConfig.minBallSpawnXPercent * GameBoardWidth;
-            var maxWidthPercent = ballConfig.minBallSpawnXPercent * GameBoardWidth;
+            var maxWidthPercent = ballConfig.maxBallSpawnXPercent * GameBoardWidth;
 
             var leftMost = -GameBoardWidth * 0.5f + minWidthPercent;
             var rightMost = -GameBoardWidth * 0.5f + maxWidthPercent;
