@@ -17,4 +17,4 @@ MonoBehaviour:
   movementSmoothTime: 0.5
   lookRotationSpeed: 1
   paddleFollowCoefficient: 0.15
-  ballLookCoefficient: 0.05
+  ballLookCoefficient: 0.04
