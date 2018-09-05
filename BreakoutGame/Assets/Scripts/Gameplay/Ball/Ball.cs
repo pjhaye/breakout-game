@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BreakoutGame
 {
@@ -44,6 +45,13 @@ namespace BreakoutGame
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void Start()
+        {
+            var scale = transform.localScale;
+            transform.localScale = Vector3.zero;
+            transform.DOScale(scale, 0.35f).SetEase(Ease.OutBack);
         }
 
         public void SetRadius(float radius)
