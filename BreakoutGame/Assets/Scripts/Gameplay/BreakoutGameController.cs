@@ -386,11 +386,16 @@ namespace BreakoutGame
         private void StartLevelCompleteSequence()
         {
             var sequence = new CommandSequence();
+            sequence.AddCommand(new DispatchDesireHudExitCommand(this));
             sequence.AddCommand(new DestroyBallCommand(this));            
             sequence.AddCommand(new DelayCommand(0.5f, this));
             sequence.AddCommand(new DispatchBeatCurrentLevelCommand(this));            
-            sequence.AddCommand(new DelayCommand(3.0f, this));
+            sequence.AddCommand(new DelayCommand(4.0f, this));
+            sequence.AddCommand(new FadeOutCommand(this));
+            sequence.AddCommand(new DelayCommand(1.0f, this));
             sequence.AddCommand(new AdvanceLevelCommand(this));
+            sequence.AddCommand(new FadeInCommand(this));
+            sequence.AddCommand(new DelayCommand(1.0f, this));
             sequence.AddCommand(new StartBallLaunchSequenceCommand(this));
             sequence.Execute();
         }
@@ -519,7 +524,6 @@ namespace BreakoutGame
             }
         }
 
-
         public void DispatchDesireStartGameScreen()
         {
             if (DesiredStartGameScreen != null)
@@ -548,6 +552,7 @@ namespace BreakoutGame
         {
             LevelController.GotoNextLevel();
             ClearBricks();
+            ResetPaddlePosition();
             GenerateCurrentLevel();            
         }
 
