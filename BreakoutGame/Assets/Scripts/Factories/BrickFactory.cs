@@ -12,6 +12,8 @@ namespace BreakoutGame
         [SerializeField]
         private BrickColorConfig[] _brickColorConfigs;
 
+        private bool _flipNextBrick;
+
         public Brick CreateBrick(BrickConfig brickConfig)
         {
             var brickGameObject = Instantiate(_brickPrefab);
@@ -24,6 +26,13 @@ namespace BreakoutGame
             brick.SetMaterial(material, weakenedMaterial);
             brick.Score = GetScoreFromBrickColor(brickConfig.color);
             brick.Color = brickConfig.color;
+
+            if(_flipNextBrick)
+            {
+                brickGameObject.transform.Rotate(Vector3.up, 180.0f);
+            }
+            _flipNextBrick = !_flipNextBrick;
+
             return brick;
         }
 
