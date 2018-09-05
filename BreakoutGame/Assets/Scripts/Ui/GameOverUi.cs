@@ -39,6 +39,11 @@ namespace BreakoutGame
 
         public void OnTryAgainButtonClick()
         {
+            if (!IsShowing)
+            {
+                return;
+            }
+
             _breakoutGameController.StartResetGameSequence();
             HideUi();
         }

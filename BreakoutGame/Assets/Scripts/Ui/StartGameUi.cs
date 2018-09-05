@@ -15,6 +15,11 @@ namespace BreakoutGame
 
         public void OnPlayButtonClick()
         {
+            if(!IsShowing)
+            {
+                return;
+            }
+
             _breakoutGameController.StartGame();
             HideUi();
         }
