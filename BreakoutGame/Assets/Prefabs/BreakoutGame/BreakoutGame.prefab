@@ -63,6 +63,8 @@ MonoBehaviour:
     type: 2}
   _nextLevelPopupPrefab: {fileID: 1481936057730872, guid: 72a7099cb0380af43959404594442544,
     type: 2}
+  _fadeUiPrefab: {fileID: 1673485728580758, guid: ecf90f29bd6578243a110733006a71d4,
+    type: 2}
 --- !u!114 &114964342401847638
 MonoBehaviour:
   m_ObjectHideFlags: 1

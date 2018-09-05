@@ -20,6 +20,8 @@ namespace BreakoutGame
         private GameObject _gameOverUiPrefab;
         [SerializeField]
         private GameObject _nextLevelPopupPrefab;
+        [SerializeField]
+        private GameObject _fadeUiPrefab;
 
         public event Action DesiredStartGameScreen;
         public event Action DesiredHudEnter;
@@ -41,7 +43,8 @@ namespace BreakoutGame
         private LevelController _levelController;
         private Ball _ball;
         private BreakoutGameStateMachine _stateMachine;
-        private HudUi _hudUi;            
+        private HudUi _hudUi;
+        private AnimatedUi _fadeUi;
 
         public LivesController LivesController
         {
@@ -205,22 +208,37 @@ namespace BreakoutGame
         private void Start()
         {
             State = new GameplayState(this);
+            CreateUiScreens();
+            ResetLives();
+            GenerateCurrentLevel();            
+            ResetGame();
+            StartIntroSequence();            
+        }
+
+        private void CreateUiScreens()
+        {
             CreateHud();
             CreateStartScreen();
             CreateGameOverScreen();
             CreateNextLevelPopup();
-            ResetLives();
-            GenerateCurrentLevel();
-            ResetGame();
-            StartIntroSequence();            
+            CreateFadeUi();
         }
 
         private void StartIntroSequence()
         {
             var sequence = new CommandSequence();
+            sequence.AddCommand(new FadeInCommand(this));
             sequence.AddCommand(new DelayCommand(1.0f, this));
             sequence.AddCommand(new DispatchDesireStartGameCommand(this));
             sequence.Execute();
+        }
+
+        private void CreateFadeUi()
+        {
+            var fadeGameObject = Instantiate(_fadeUiPrefab);
+            fadeGameObject.name = _fadeUiPrefab.name;
+            _fadeUi = fadeGameObject.GetComponent<AnimatedUi>();
+            _fadeUi.ShowUiInstant();
         }
 
         private void CreateStartScreen()
@@ -548,11 +566,23 @@ namespace BreakoutGame
             _playerInputController.enabled = value;
         }
 
+        public void FadeOut()
+        {
+            _fadeUi.ShowUi();
+        }
+
+        public void FadeIn()
+        {
+            _fadeUi.HideUi();
+        }
+
         public void StartResetGameSequence()
         {
             var sequence = new CommandSequence();
-            sequence.AddCommand(new DelayCommand(1.0f, this));
+            sequence.AddCommand(new FadeOutCommand(this));
+            sequence.AddCommand(new DelayCommand(1.0f, this));            
             sequence.AddCommand(new ResetGameCommand(this));
+            sequence.AddCommand(new FadeInCommand(this));
             sequence.AddCommand(new StartBallLaunchSequenceCommand(this));
             sequence.Execute();
         }
