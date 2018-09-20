@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using BreakoutGame;
+using BreakoutGame.ECS;
 using UnityEngine;
 
 namespace BreakoutGame
@@ -175,9 +176,13 @@ namespace BreakoutGame
 
             var unitSize = breakoutGameController.UnitSize;
 
-            paddle.XExtents = new Vector2(
+            var paddleComponent = paddleGameObject.GetComponent<PaddleComponent>();
+
+            var paddleComponentData = paddleComponent.Value;
+            paddleComponentData.XExtents = new Vector2(
                 -breakoutGameController.GameBoardWidth * 0.5f * unitSize,
                 breakoutGameController.GameBoardWidth * 0.5f * unitSize);
+            paddleComponent.Value = paddleComponentData;
 
             paddle.SetWidth(unitSize, paddleConfig.paddleWidth);
             paddle.SetMaximumSpeed(paddleConfig.maximumSpeed);
